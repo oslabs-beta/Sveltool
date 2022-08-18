@@ -1,1 +1,0 @@
-//BUILD BACKGROUND.JS FILE FOR EXTENSION ACCESS --> https://developer.chrome.com/docs/extensions/mv2/background_pages/

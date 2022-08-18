@@ -1,10 +1,10 @@
 {
-  "name": "Sveltetool",
+  "name": "Sveltool",
   "version": "1.0",
-  "description": "Dynamic visualization for all things Svelte.",
+  "description": "Dynamic visualization for all things Svelte",
   "manifest_version": 3,
   "minimum_chrome_version": "10.0",
-  "devtools_page": "devtools.html",
+  "devtools_page": "./devtool/devTools.html",
   
   "action": {
     "default_icon": {
@@ -12,16 +12,18 @@
       "48": "icon-48.png",
       "128": "icon-128.png"
     },
-    "default_title": "Sveltetool"
+    "default_title": "Sveltool"
   },
   
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "./devtool/background.js"
   },
   
-  "permissions": ["tabs", "devtools", "contextMenus"],
+  "permissions": ["tabs", "contextMenus"],
   
   "web_accessible_resources": [{
+    "resources": ["./devtool/content-script.js"],
+    "matches": ["https://*/*", "http://*/*"]
   }],
 
   "externally_connectable": {
@@ -35,8 +37,7 @@
 
   "content_scripts": [{
       "matches": ["https://*/*", "http://*/*"], 
-      "js": [], 
-      "css": [], 
+      "js": ["./devtool/content-script.js"], 
       "run_at": "document_start" 
 }]
 

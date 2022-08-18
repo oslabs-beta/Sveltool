@@ -4,7 +4,7 @@ import resolve from 'rollup-plugin-node-resolve'
 import css from 'rollup-plugin-css-only'
 import jscc from 'rollup-plugin-jscc'
 
-import format from './scripts/format.mjs'
+import format from './scripts/format.mjs.js.js'
 
 export default [{
   input: 'src/index.js',
