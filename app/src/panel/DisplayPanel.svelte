@@ -2,8 +2,8 @@
 
 </script>
 <div>
-    NavBar
+    Display Panel
 </div>
 <style>
-    
+
 </style>
