@@ -1,8 +1,9 @@
 <script>
-  import svelteLogo from "./assets/svelte.svg";
-  import Counter from "./lib/Counter.svelte";
-  import DisplayContainer from "./panel/DisplayContainer.svelte";
+  import DisplayContainer from "./leftPanel/DisplayContainer.svelte";
   import SideBarContainer from "./sidebar/SideBarContainer.svelte";
+
+
+
 </script>
 
 <main>
@@ -18,6 +19,6 @@
     padding: 0;
     display: grid;
     /* grid-template-columns: minmax(0, 60%) minmax(0, 40%); */
-    grid-template-columns: 2fr 1fr;;
+    grid-template-columns: 2fr 1fr;
   }
 </style>

@@ -3,7 +3,7 @@
 </script>
 
 <div id={`${type.toLowerCase()}-navbar`}>
-  <h2>{type}</h2>
+  <div>{type}</div>
 </div>
 
 <style>
@@ -13,9 +13,16 @@
     display: flex;
     align-items: center;
     border-bottom: 1px solid rgb(96, 99, 104);
+    height: 35px;
+    background-color: rgb(76, 80, 86);
   }
 
-  h2 {
-    margin-left: 5px;
+  div {
+    padding: 5px;
+    color: #fff;
+    font-size: 1.2rem;
   }
+div:hover{
+    background-color: #bbbaba;
+}
 </style>

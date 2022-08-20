@@ -12,6 +12,13 @@
 html {
   box-sizing: border-box;
   font-size: 62.5%;
+   height: 100%;
+    width: 100%;
+}
+
+#app{
+   height: 100%;
+    width: 100%;
 }
 
 body {
@@ -22,6 +29,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  height: 100%;
+  width: 100%;
 }
 
 body::-webkit-scrollbar {
@@ -35,7 +44,24 @@ li {
 a {
   text-decoration: none;
 }
+.node circle {
+  fill: grey;
+  stroke: black;
+  stroke-width: 1px;
+}
 
+.node text {
+  font: 14px sans-serif;
+}
+
+.link {
+  fill: none;
+  stroke: #000000;
+  stroke-width: 1px;
+}
+
+.hierarchy-container {
+}
 @media only screen and (max-width: 550px) {
   html {
     font-size: 50%;

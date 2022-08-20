@@ -28,10 +28,11 @@
 
   "externally_connectable": {
     "matches": ["http://localhost/*"]
+    
 },
 
   "content_security_policy": {
-      "extension pages": "script-src 'self' https://d3js.org/d3.v7.min.js; object-src 'self'" 
+      "extension pages": "script-src 'self' ./app/src/utils/d3Render object-src 'self'" 
 },
 
 

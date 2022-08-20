@@ -1,9 +1,0 @@
-<script>
-
-</script>
-<div>
-    NavBar
-</div>
-<style>
-    
-</style>

@@ -1,0 +1,1 @@
+console.log(chrome, 'content script')
