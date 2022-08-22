@@ -12,18 +12,16 @@
 html {
   box-sizing: border-box;
   font-size: 62.5%;
-   height: 100%;
-    width: 100%;
+  height: 100%;
+  width: 100%;
 }
 
-#app{
-   height: 100%;
-    width: 100%;
+#app {
+  height: 100%;
+  width: 100%;
 }
 
 body {
-  color: #000;
-  background: #fff;
   font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -33,7 +31,7 @@ body {
   width: 100%;
 }
 
-body::-webkit-scrollbar {
+*::-webkit-scrollbar {
   display: none;
 }
 
@@ -60,10 +58,41 @@ a {
   stroke-width: 1px;
 }
 
+.hierarchy-container::-webkit-scrollbar {
+  display: none;
+}
+
 .hierarchy-container {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
 }
 @media only screen and (max-width: 550px) {
   html {
     font-size: 50%;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #4c5056;
+  }
+
+  svg {
+    fill: #fff;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  body {
+    background: #fff;
+  }
+
+  svg {
+    fill: #000;
+  }
+
+  circle {
+    fill: grey;
   }
 }

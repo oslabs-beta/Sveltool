@@ -16,7 +16,7 @@
 <style>
     .nav-bar{
         display: flex;
-         padding: 0 15px;
+       
          border-bottom: 1px solid rgb(96, 99, 104);
          background-color: rgb(76, 80, 86);
     }

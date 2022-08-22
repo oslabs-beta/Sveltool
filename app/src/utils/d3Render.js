@@ -76,16 +76,17 @@ class MyTree {
     this.tree = null;
     this.root = null;
     this.svg = null;
+    this.colorScheme = null;
   }
 
-  $onInit(d3El) {
+  $onInit(d3El, width, height, colorScheme) {
     this.margin = { top: 20, right: 10, bottom: 20, left: 10 };
-    this.width = 1400 - this.margin.right - this.margin.left;
-    this.height = 800 - this.margin.top - this.margin.bottom;
+    this.width = width - this.margin.right - this.margin.left;
+    this.height = height - this.margin.top - this.margin.bottom;
     this.barHeight = 20;
     this.barWidth = this.width * 0.8;
     this.i = 0;
-    this.duration = 750;
+    this.duration = 600;
     this.tree = tree().size([this.width, this.height]);
     // this.tree = tree().nodeSize([0, 30]);
 
@@ -115,11 +116,11 @@ class MyTree {
       );
 
     // this.root.children.forEach(this.collapse);
-    this.update(this.root);
+    this.update(this.root, colorScheme);
   }
 
   connector = function (d) {
-    //curved
+    // //curved
     // return (
     //   "M" +
     //   d.y +
@@ -161,12 +162,12 @@ class MyTree {
       d._children = null;
     }
 
-    this.update(d);
+    this.update(d, this.colorScheme);
   };
 
-  update = (source) => {
+  update = (source, colorScheme) => {
     this.width = 800;
-
+    this.colorScheme = colorScheme ? colorScheme : this.colorScheme;
     // Compute the new tree layout.
     let nodes = this.tree(this.root);
     let nodesSort = [];
@@ -203,14 +204,20 @@ class MyTree {
       .attr("transform", function () {
         return "translate(" + source.y0 + "," + source.x0 + ")";
       })
-      .on("click", this.click);
+      .on("click", (e) => {
+        this.click(e);
+      });
 
     nodeEnter
       .append("circle")
       .attr("r", 5)
       // @ts-ignore
       .style("fill", function (d) {
-        return d._children ? "black" : "grey";
+        if (colorScheme === "light") {
+          return d._children ? "black" : "grey";
+        } else {
+          return d._children ? "black" : "white";
+        }
       });
 
     nodeEnter
@@ -252,7 +259,11 @@ class MyTree {
       .attr("r", 5)
       // @ts-ignore
       .style("fill", function (d) {
-        return d._children ? "black" : "grey";
+        if (colorScheme === "light") {
+          return d._children ? "black" : "grey";
+        } else {
+          return d._children ? "black" : "white";
+        }
       });
 
     nodeUpdate.select("text").style("fill-opacity", 1);
