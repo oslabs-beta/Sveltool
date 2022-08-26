@@ -1,7 +1,7 @@
 <script>
 
 import DisplayPanel from "./DisplayPanel.svelte";
-  import Navbar from "./Navbar.svelte";
+import Navbar from "./Navbar.svelte";
 </script>
 
 <div id="display-container">
@@ -14,6 +14,6 @@ import DisplayPanel from "./DisplayPanel.svelte";
     border: 1px solid rgb(105, 107, 112);
     display: grid;
     grid-template-rows: 35px minmax(0, 1fr);
-    overflow: auto;
+    overflow: hidden
   }
 </style>
