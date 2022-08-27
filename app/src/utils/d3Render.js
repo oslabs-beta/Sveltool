@@ -1,4 +1,5 @@
 import * as d3 from "d3";
+import { geoConicConformalRaw } from "d3";
 import { count } from "./store";
 
 /*jshint esversion: 6 */
@@ -11,46 +12,76 @@ let hierarchy = d3.hierarchy;
 let select = d3.select;
 let data = {
   name: "app",
+  props: "propsApp",
+  state: "stateApp",
   children: [
     {
       name: "navbar",
+      props: "navbarProps",
+      state: "navbarState",
       children: [
         {
           name: "logo",
+          children: false,
+          props: 'logoProp',
+          state: 'logoState'
         },
         {
           name: "title",
+          children: false,
+          props: 'titleProp',
+          state: 'titleState'
         },
         {
           name: "signin",
+          children: false,
+          props: 'signInProp',
+          state: 'signInState'
         },
         {
           name: "signup",
+          children: false,
+          props: 'signUpProp',
+          state: 'signUpState'
         },
       ],
     },
     {
       name: "content",
+      props: "contentProps",
+      state: "contentState",
       children: [
         {
           name: "test1",
+          props: 'contentProp',
+          state: 'contentState',
           children: [
             {
               name: "test1a",
+              props: "test1aProp",
+              state: 'test1aState'
             },
             {
               name: "test1b",
+              props: 'test1bProp',
+              state: 'test1bState',
             },
             {
               name: "test1c",
+              props: 'test1cProp',
+              state: 'test1cState',
             },
           ],
         },
         {
           name: "test2",
+          props:"test2Props",
+          state: "test2State",
           children: [
             {
               name: "test2a",
+              props:"test2a_Props",
+              state:"test2a_State"
             },
             {
               name: "test2b",
@@ -154,8 +185,43 @@ class MyTree {
     }
   };
 
+
+  //create function that iterates through components
+  //if target component === component[i]
+  //then access props & state of that component
+  //display props & state on side panel
+
+  //passing in component clicked on and root component
+  componentSearch = (d, sourceData) => {
+  console.log('d componentSearch==>', d)
+  console.log('sourceData==>', sourceData.name)
+  console.log('sourceData to D', sourceData.name === d)
+  //checking if root component is the component clicked on
+    if(sourceData.name === d) {
+      console.log('sourceData.name')
+      return {props: sourceData.props, state: sourceData.state } 
+    }
+
+
+  //if it's not root component that was clicked --> if root component has children, then iterate through children
+  if(sourceData.children) {
+       for(let i = 0; i < sourceData.children.length; i++) {
+
+       //recursively call component search to see if sourceData.children[i] has children
+       this.componentSearch(d, sourceData.children[i])
+
+      }
+
+  }
+  return "Didn't find component"
+  }
+
   click = (d) => {
     d = d.target.__data__;
+    
+    console.log('d in click func --> ', d)
+    console.log('d.name', d.data.name)
+    console.log(this.componentSearch(d.data.name, data)) 
     count.update((n) => n + 1);
     if (d.children) {
       d._children = d.children;

@@ -29,8 +29,8 @@ window.matchMedia("(prefers-color-scheme: dark)").addListener(function (e) {
 
 
 </script> 
-
-<!-- <div>{countValue}</div> -->
+<!-- 
+<div>{countValue}</div> -->
 <div class="hierarchy-container" bind:this={el} bind:clientWidth={width} bind:clientHeight={height}></div>
 
 <style>

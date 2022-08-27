@@ -3,7 +3,7 @@
 </script>
 
 <div id={`${type.toLowerCase()}-display`}>
-  <div id={`${type.toLowerCase()}-root`} />
+  <div id={`${type.toLowerCase()}-root`}></div>
 </div>
 
 <style>
