@@ -2,11 +2,12 @@
   import SideNavBar from "./SideNavBar.svelte";
   import DisplayView from "./DisplayView.svelte";
   export let type;
+  export let data;
 </script>
 
 <div id={`${type.toLowerCase()}-container`}>
   <SideNavBar {type} />
-  <DisplayView {type} />
+  <DisplayView {type} {data} />
 </div>
 
 <style>

@@ -2,17 +2,15 @@
 
 import tree from '../utils/d3Render.js';
 import {onMount} from 'svelte';
-import {count} from '../utils/store.js'
-
 
 let el;
 let width;
 let height;
 let countValue;
 
-count.subscribe(val=>{
-    countValue = val
-})
+// count.subscribe(val=>{
+//     countValue = val
+// })
 
 let colorScheme =  window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 
