@@ -1,4 +1,5 @@
 import * as d3 from "d3";
+import { count } from "./store";
 
 /*jshint esversion: 6 */
 (function () {
@@ -77,6 +78,7 @@ class MyTree {
     this.root = null;
     this.svg = null;
     this.colorScheme = null;
+    this.component = "";
   }
 
   $onInit(d3El, width, height, colorScheme) {
@@ -89,7 +91,7 @@ class MyTree {
     this.duration = 600;
     this.tree = tree().size([this.width, this.height]);
     // this.tree = tree().nodeSize([0, 30]);
-
+    this.component = "";
     this.tree = tree().nodeSize([0, 30]);
     this.root = this.tree(hierarchy(data));
 
@@ -154,6 +156,7 @@ class MyTree {
 
   click = (d) => {
     d = d.target.__data__;
+    count.update((n) => n + 1);
     if (d.children) {
       d._children = d.children;
       d.children = null;
@@ -209,16 +212,16 @@ class MyTree {
       });
 
     nodeEnter
-      .append("circle")
-      .attr("r", 5)
-      // @ts-ignore
-      .style("fill", function (d) {
-        if (colorScheme === "light") {
-          return d._children ? "black" : "grey";
-        } else {
-          return d._children ? "black" : "white";
-        }
-      });
+      .append("polygon")
+      .attr("points", function (d) {
+        return d._children ? "0 -5, 0 4, 7 0" : "0 -1, 5 5, 9 -1";
+      })
+      .style("cursor", function (d) {
+        return "pointer";
+      })
+      .attr("fill", "#ff3e00");
+
+    // @ts-ignore
 
     nodeEnter
       .append("text")
@@ -239,7 +242,8 @@ class MyTree {
           return d.data.name;
         }
       })
-      .style("fill-opacity", 1e-6);
+      .style("fill-opacity", 1e-6)
+      .style("cursor", "pointer");
 
     // @ts-ignore
     nodeEnter.append("svg:title").text(function (d) {
@@ -255,15 +259,15 @@ class MyTree {
     });
 
     nodeUpdate
-      .select("circle")
-      .attr("r", 5)
+      .select("polygon")
+      .attr("points", function (d) {
+        return d._children ? "0.9 -5, 0.9 4, 7 0" : "0 -3, 5 2, 9 -3";
+      })
+      .attr("fill", "#ff3e00")
+      .attr("height", "50px")
       // @ts-ignore
-      .style("fill", function (d) {
-        if (colorScheme === "light") {
-          return d._children ? "black" : "grey";
-        } else {
-          return d._children ? "black" : "white";
-        }
+      .style("cursor", function (d) {
+        return "pointer";
       });
 
     nodeUpdate.select("text").style("fill-opacity", 1);
@@ -278,7 +282,9 @@ class MyTree {
       })
       .remove();
 
-    nodeExit.select("circle").attr("r", 1e-6);
+    nodeExit.select("polygon").attr("points", function (d) {
+      return "0 -5, 0 4, 7 0";
+    });
 
     nodeExit.select("text").style("fill-opacity", 1e-6);
 
