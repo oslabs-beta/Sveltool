@@ -1,81 +1,106 @@
-:root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
+*,
+*::before,
+*::after {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  padding: 0;
+  box-sizing: inherit;
+  scroll-behavior: smooth;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-.card {
-  padding: 2em;
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+  height: 100%;
+  width: 100%;
 }
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  height: 100%;
+  width: 100%;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+body {
+  font-family: "Poppins", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  height: 100%;
+  width: 100%;
 }
-button:hover {
-  border-color: #646cff;
+
+*::-webkit-scrollbar {
+  display: none;
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+g {
+  width: 20rem !important;
+}
+
+/* .node polygon {
+  fill: grey;
+  stroke: black;
+  stroke-width: 1px;
+} */
+
+.node text {
+  font: 14px sans-serif;
+}
+
+.link {
+  fill: none;
+  stroke: #000000;
+  stroke-width: 1px;
+}
+
+.hierarchy-container::-webkit-scrollbar {
+  display: none;
+}
+
+.hierarchy-container {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.dropdown {
+  background: url('data:image/svg+xml;charset=US-ASCII,<svg%20xmlns%3D"http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg"%20viewBox%3D"0%200%20256%20448"%20enable-background%3D"new%200%200%20256%20448"><style%20type%3D"text%2Fcss">.arrow%7Bfill%3A%23424242%3B%7D<%2Fstyle><path%20class%3D"arrow"%20d%3D"M255.9%20168c0-4.2-1.6-7.9-4.8-11.2-3.2-3.2-6.9-4.8-11.2-4.8H16c-4.2%200-7.9%201.6-11.2%204.8S0%20163.8%200%20168c0%204.4%201.6%208.2%204.8%2011.4l112%20112c3.1%203.1%206.8%204.6%2011.2%204.6%204.4%200%208.2-1.5%2011.4-4.6l112-112c3-3.2%204.5-7%204.5-11.4z"%2F><%2Fsvg>%0A');
+}
+@media only screen and (max-width: 550px) {
+  html {
+    font-size: 50%;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #4c5056;
+  }
+
+  svg {
+    fill: #fff;
+  }
 }
 
 @media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+  body {
+    background: #fff;
   }
-  a:hover {
-    color: #747bff;
+
+  svg {
+    fill: #000;
   }
-  button {
-    background-color: #f9f9f9;
+
+  circle {
+    fill: grey;
   }
 }
