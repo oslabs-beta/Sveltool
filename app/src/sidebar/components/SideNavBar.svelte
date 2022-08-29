@@ -1,5 +1,6 @@
 <script>
   export let type;
+
 </script>
 
 <div id={`${type.toLowerCase()}-navbar`}>
