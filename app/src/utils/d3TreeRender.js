@@ -1,5 +1,4 @@
 import * as d3 from "d3";
-import { geoConicConformalRaw } from "d3";
 import { componentProps, componentState } from "./store";
 
 /*jshint esversion: 6 */
@@ -235,14 +234,12 @@ class MyTree {
   click = (d) => {
     d = d.target.__data__;
     // console.log("d in click func --> ", d);
-    console.log("d.name", d.data)
+    // console.log("d.name", d.data)
     componentState.update(()=>{ 
-       console.log('stata', d.data.state)
         return  d.data.state;
     })
 
     componentProps.update(()=> {
-      console.log('d.data.props', d.data.props)
       return d.data.props;
     })
 

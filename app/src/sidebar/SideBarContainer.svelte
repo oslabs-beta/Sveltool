@@ -4,10 +4,11 @@
   let props;
   let state;
 
+
   componentProps.subscribe(val=>{
     props = val;
 
-});
+  });
 
 componentState.subscribe(val=>{
     state = val;
