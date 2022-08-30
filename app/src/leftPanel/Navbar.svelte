@@ -1,11 +1,11 @@
 <script>
   export let panelTree;
-  export let panelChart;
+  export let panelProfiler;
 </script>
 
 <span class="nav-bar">
   <div class="nav-bar-tab" on:click={panelTree}>Component Tree</div>
-  <div class="nav-bar-tab" on:click={panelChart}>Chart Visualizer</div>
+  <div class="nav-bar-tab" on:click={panelProfiler}>Performance Profiler</div>
 </span>
 
 <style>

@@ -1,15 +1,16 @@
 <script>
   import SideNavBar from "./SideNavBar.svelte";
-  import DisplayView from "./DisplayView.svelte";
-  // import {viewType } from "../../utils/store";
+  import PropsDisplayView from "./PropsDisplayView.svelte";
+
   export let type;
   export let data;
+  console.log('props-->', data)
 
 </script>
 
 <div id={`${type.toLowerCase()}-container`}>
   <SideNavBar {type} />
-  <DisplayView {type} {data} />
+  <PropsDisplayView {type} {data} />
 </div>
 
 <style>

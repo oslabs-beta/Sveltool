@@ -235,11 +235,13 @@ class MyTree {
     d = d.target.__data__;
     // console.log("d in click func --> ", d);
     // console.log("d.name", d.data)
-    componentState.update(()=>{ 
+    componentState.update(() => { 
+      // console.log(d.data.state, '<=== state')
         return  d.data.state;
     })
 
     componentProps.update(()=> {
+        //  console.log(d.data.state, '<=== props')
       return d.data.props;
     })
 

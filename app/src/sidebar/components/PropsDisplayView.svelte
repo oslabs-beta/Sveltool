@@ -1,15 +1,23 @@
 <script>
   export let type;
   export let data;
- 
-  // const display = JSON.stringify(data)
-  // console.log('display',data)
+
+  const propsArray = [];
+
+  for (const key in data) {
+    propsArray.push(`${key}: ${data[key]}`);
+  }
+
 </script>
 
 <div id={`${type.toLowerCase()}-display`}>
-   <div id={`${type.toLowerCase()}-root`}>{JSON.stringify(data)}</div>
-
+  <ul>
+    {#each propsArray as prop}
+      <li id={`${type.toLowerCase()}-root`}>{prop}</li>
+    {/each}
+  </ul>
 </div>
+
 <style>
   #state-display,
   #props-display {
