@@ -1,22 +1,27 @@
 <script>
   import DisplayPanelTree from "./DisplayPanelTree.svelte";
-  import DisplayPanelChart from "./DisplayPanelChart.svelte";
+  import PerformanceProfiler from "./PerformanceProfiler.svelte";
   import Navbar from "./Navbar.svelte";
+  import { onMount } from "svelte";
   let component;
   let props;
+  onMount(() => {
+    panelTree();
+  });
   const panelTree = () => {
     component = DisplayPanelTree;
     props = { treeProp: DisplayPanelTree };
   };
+ 
 
-  const panelChart = () => {
-    component = DisplayPanelChart;
-    props = { chartProps: DisplayPanelTree };
+  const panelProfiler = () => {
+    component = PerformanceProfiler;
+    props = { chartProps: PerformanceProfiler };
   };
 </script>
 
 <div id="display-container">
-  <Navbar {panelTree} {panelChart} />
+  <Navbar {panelTree} {panelProfiler} />
   <svelte:component this={component} {...props} />
   <!-- <DisplayPanel  /> -->
 </div>
