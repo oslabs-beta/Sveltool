@@ -11,94 +11,107 @@ let hierarchy = d3.hierarchy;
 let select = d3.select;
 let data = {
   name: "app",
-  props:{
-    firstName: 'Meow', 
-    lastName: 'Merry',
+  props: {
+    firstName: "Meow",
+    lastName: "Merry",
   },
   state: {
-    stateFirstName: 'Meow', 
-    stateLastName: 'Merry',
+    stateFirstName: "Meow is first state",
+    stateLastName: "Merry is second state",
   },
   children: [
     {
       name: "navbar",
       props: {
-        navBarProps: "navbarProps",
-        navBarProps2: 'navbarprops2'},
+        navBarProps: "We're in the navBar props",
+        navBarProps2: "We are in the navBar props again",
+      },
       state: {
-        navBarState: "navbarState",
-       },
+        navBarState: "Here we have the navbarState",
+      },
       children: [
         {
           name: "logo",
           children: false,
           props: {
             logoProps: "logoProps",
-            logoProps2: 'logoProps2'},
+            logoProps2: "logoProps2",
+          },
           state: {
             logoState: "logoState",
-            },
+          },
         },
         {
           name: "title",
           children: false,
           props: {
             titleProps: "titleProps",
-            titleProps2: 'titleprops2'},
+            titleProps2: "titleprops2",
+          },
           state: {
             titleState: "titleState",
-           },
+          },
         },
         {
           name: "signin",
           children: false,
-          props: "signInProp",
-          state: "signInState",
+          props: {
+            signInProps: "signInProp",
+            signInProps2: "Hi I'm signing in",
+          },
+          state: {
+            SignInState: "signInState",
+          },
         },
         {
           name: "signup",
           children: false,
-          props: "signUpProp",
-          state: "signUpState",
+          props: {
+            signUpProps: "signUpProp",
+            signUpProps2: "Hi I'm signing up",
+          },
+          state: {
+            SignUpState: "signUpState",
+          },
         },
       ],
     },
     {
       name: "content",
-      props: "contentProps",
-      state: "contentState",
+      props: { prop1: "contentProps" },
+      state: { state1: "contentState" },
       children: [
         {
           name: "test1",
-          props: "contentProp",
-          state: "contentState",
+          props: { contentProp: "contentProp" },
+          state: { contentState: "contentState" },
           children: [
             {
               name: "test1a",
-              props: "test1aProp",
-              state: "test1aState",
+              props: { test1aprop: "test1aProp" },
+              state: { test1astate: "test1aState" },
             },
             {
               name: "test1b",
-              props: "test1bProp",
-              state: "test1bState",
+              props: { test1bProp: "test1bProp" },
+              state: { test1bState: "test1bState" },
             },
             {
               name: "test1c",
-              props: "test1cProp",
-              state: "test1cState",
+              props: { test1cProp: "test1cProp" },
+              state: { test1cState: "test1cState" },
             },
           ],
         },
         {
           name: "test2",
-          props: "test2Props",
-          state: "test2State",
+          props: { test2props: "test2Props" },
+          state: { test2state: "test2State" },
           children: [
             {
               name: "test2a",
-              props: "test2a_Props",
-              state: "test2a_State",
+              props: { test2aprop: "test2a_Props" },
+              state: { test2astate: "test2a_State" },
             },
             {
               name: "test2b",
@@ -235,17 +248,19 @@ class MyTree {
     d = d.target.__data__;
     // console.log("d in click func --> ", d);
     // console.log("d.name", d.data)
-    componentState.update(() => { 
-      // console.log(d.data.state, '<=== state')
-        return  d.data.state;
-    })
-
-    componentProps.update(()=> {
-        //  console.log(d.data.state, '<=== props')
-      return d.data.props;
-    })
-
+    let props;
+    componentProps.update(() => {
     
+      props = d.data.props;
+   
+      return props;
+    });
+    componentState.update((state) => {
+      // console.log(d.data.state, '<=== state')
+      state = d.data.state;
+      return state;
+    });
+
     // count.update((n) => n + 1);
     // if (d.children) {
     //   d._children = d.children;

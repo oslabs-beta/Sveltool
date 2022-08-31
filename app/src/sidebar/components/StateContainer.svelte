@@ -3,14 +3,14 @@
   import StateDisplayView from "./StateDisplayView.svelte";
 
   export let type;
-  export let data;
-  console.log('state-->', data)
+
+
 
 </script>
 
 <div id={`${type.toLowerCase()}-container`}>
   <SideNavBar {type} />
-  <StateDisplayView {type} {data} />
+  <StateDisplayView {type}  />
 </div>
 
 <style>

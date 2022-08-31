@@ -1,13 +1,16 @@
 <script>
+  import { componentProps } from "../../utils/store";
   export let type;
-  export let data;
+  let props;
+  let propsArray;
 
-  const propsArray = [];
-
-  for (const key in data) {
-    propsArray.push(`${key}: ${data[key]}`);
-  }
-
+  componentProps.subscribe((val) => {
+    propsArray = [];
+    props = val;
+    for (const key in props) {
+      propsArray = [...propsArray, `${key}: ${JSON.stringify(props[key])}`];
+    }
+  });
 </script>
 
 <div id={`${type.toLowerCase()}-display`}>
