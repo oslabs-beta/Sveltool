@@ -1,6 +1,7 @@
 'use strict';
 
 const path = require('path');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -16,6 +17,10 @@ const IMAGE_TYPES = /\.(png|jpe?g|gif|svg)$/i;
 // Whenever user creates an extension, CLI adds `webpack.common.js` file
 // in template's `config` folder
 const common = {
+  entry: {
+    'panel': path.resolve(__dirname, '../src/panel.js'),
+    'devTools': path.resolve(__dirname, '../src/devTools.js'),
+  },
   output: {
     // the build folder to output bundles and assets in.
     path: PATHS.build,
@@ -62,6 +67,8 @@ const common = {
     extensions: ['.js', '.svelte']
   },
   plugins: [
+    // Clean build folder
+    new CleanWebpackPlugin(),
     // Copy static assets from `public` folder to `build` folder
     new CopyWebpackPlugin({
       patterns: [
@@ -69,7 +76,7 @@ const common = {
           from: '**/*',
           context: 'public',
           filter: (resourcePath) => {
-            if (resourcePath.slice(resourcePath.lastIndexOf('/')) === '/index.html') return false;
+            if (resourcePath.slice(resourcePath.lastIndexOf('.html')) === '.html') return false;
             return true;
           }
         },
@@ -81,6 +88,14 @@ const common = {
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../public/panel.html'),
+      chunks: ['panel'],
+      filename: 'panel.html',
+      inject: true
+    }),
+    new HtmlWebpackPlugin({
+      chunks: ['devTools'],
+      filename: 'devTools.html',
+      inject: true
     }),
     new Dotenv(),
   ],

@@ -4,7 +4,7 @@
   "description": "Dynamic visualization for all things Svelte",
   "manifest_version": 3,
   "minimum_chrome_version": "10.0",
-  "devtools_page": "./devtool/devTools.html",
+  "devtools_page": "./devTools.html",
   
   "action": {
     "default_icon": {
@@ -16,13 +16,13 @@
   },
   
   "background": {
-    "service_worker": "../src/background.js"
+    "service_worker": "./background.js"
   },
   
   "permissions": ["tabs", "contextMenus"],
   
   "web_accessible_resources": [{
-    "resources": ["./devtool/content-script.js"],
+    "resources": ["./contentScript.js"],
     "matches": ["https://*/*", "http://*/*"]
   }],
 
@@ -37,7 +37,7 @@
 
   "content_scripts": [{
       "matches": ["https://*/*", "http://*/*"], 
-      "js": ["./devtool/content-script.js"], 
+      "js": ["./contentScript.js"], 
       "run_at": "document_start" 
 }]
 
