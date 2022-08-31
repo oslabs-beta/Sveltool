@@ -178,7 +178,7 @@ class MyTree {
         "translate(" + this.margin.left + "," + this.margin.top + ")"
       );
 
-    // this.root.children.forEach(this.collapse);
+    this.root.children.forEach(this.collapse);
     this.update(this.root, colorScheme);
   }
 
@@ -215,19 +215,11 @@ class MyTree {
     }
   };
 
-  //create function that iterates through components
-  //if target component === component[i]
-  //then access props & state of that component
-  //display props & state on side panel
-
   //DONT NEED THIS FUNCTION -- BUT THIS IS HOW IT WORKS UNDERHOOD//
   // //passing in component clicked on and root component
   // componentSearch = (d, sourceData) => {
   //   let resultData;
-  //   console.log("d componentSearch==>", d);
-  //   console.log("sourceDataName==>", sourceData.name);
-  //   // console.log("sourceData to D", sourceData.name === d);
-  //   //checking if root component is the component clicked on
+
   //   if (sourceData.name === d) {
   //     resultData = { props: sourceData.props, state: sourceData.state };
   //     return resultData;
@@ -246,29 +238,24 @@ class MyTree {
 
   click = (d) => {
     d = d.target.__data__;
-    // console.log("d in click func --> ", d);
-    // console.log("d.name", d.data)
     let props;
     componentProps.update(() => {
-    
       props = d.data.props;
-   
+
       return props;
     });
     componentState.update((state) => {
-      // console.log(d.data.state, '<=== state')
       state = d.data.state;
       return state;
     });
 
-    // count.update((n) => n + 1);
-    // if (d.children) {
-    //   d._children = d.children;
-    //   d.children = null;
-    // } else {
-    //   d.children = d._children;
-    //   d._children = null;
-    // }
+    if (d.children) {
+      d._children = d.children;
+      d.children = null;
+    } else {
+      d.children = d._children;
+      d._children = null;
+    }
 
     this.update(d, this.colorScheme);
   };
