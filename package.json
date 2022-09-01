@@ -1,7 +1,7 @@
 {
-  "name": "demo-chrome-extension",
-  "version": "0.1.0",
-  "description": "My Chrome Extension",
+  "name": "sveltool",
+  "version": "0.0.1",
+  "description": "Dynamic visualization for all things Svelte",
   "private": true,
   "scripts": {
     "watch": "webpack --mode=development --watch --config config/webpack.config.js",
@@ -28,6 +28,9 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
-    "svelte": "^3.49.0"
+    "d3": "^7.6.1",
+    "d3v4": "^4.2.2",
+    "svelte": "^3.49.0",
+    "svelte-icons-pack": "^2.0.0"
   }
 }

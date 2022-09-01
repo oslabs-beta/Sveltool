@@ -1,0 +1,35 @@
+<script>
+  import SideNavBar from "./SideNavBar.svelte";
+
+  import PropsDisplayView from "./PropsDisplayView.svelte";
+
+  export let type;
+  // export let data;
+  // $: data;
+  // let props;
+  // componentProps.update((val) => {
+  //   props = val;
+  // });
+
+
+
+</script>
+
+<div id={`${type.toLowerCase()}-container`}>
+  <SideNavBar {type} />
+  <PropsDisplayView {type}  />
+</div>
+
+<style>
+  #state-container,
+  #props-container {
+    border: 1px solid rgb(105, 107, 112);
+    display: grid;
+    grid-template-rows: 35px minmax(0, 1fr);
+    overflow: auto;
+  }
+
+  #props-container {
+    grid-template-rows: 30px minmax(0, 1fr);
+  }
+</style>
