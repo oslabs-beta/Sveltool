@@ -108,13 +108,15 @@ import path from 'path';
 
 ////// *************>-----------< START >-----------<************** ///////
 
-function getInspectedResources () {
+function getInspectedResources() {
   // get all files from current tab
-  chrome.devtools.inspectedWindow.getResources( resources => {
+  chrome.devtools.inspectedWindow.getResources((resources) => {
     // filter Svelte files from "rescources"
-    const svelteFilesArr = resources.filter(file => file.url.includes(".svelte"));
+    const svelteFilesArr = resources.filter((file) =>
+      file.url.includes('.svelte')
+    );
     return svelteFilesArr;
-  })
+  });
 }
 
 export default resources = getInspectedResources();

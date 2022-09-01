@@ -1,5 +1,5 @@
 <script>
-  import { componentProps } from "../../utils/store";
+  import { componentProps } from "../../utils/store.js";
   export let type;
   let props;
   let propsArray;

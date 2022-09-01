@@ -18,8 +18,8 @@ const IMAGE_TYPES = /\.(png|jpe?g|gif|svg)$/i;
 // in template's `config` folder
 const common = {
   entry: {
-    'panel': path.resolve(__dirname, '../src/panel.js'),
-    'devTools': path.resolve(__dirname, '../src/devTools.js'),
+    panel: path.resolve(__dirname, '../src/panel.js'),
+    devTools: path.resolve(__dirname, '../src/devTools.js'),
   },
   output: {
     // the build folder to output bundles and assets in.
@@ -64,7 +64,7 @@ const common = {
     ],
   },
   resolve: {
-    extensions: ['.js', '.svelte']
+    extensions: ['.js', '.svelte'],
   },
   plugins: [
     // Clean build folder
@@ -76,9 +76,12 @@ const common = {
           from: '**/*',
           context: 'public',
           filter: (resourcePath) => {
-            if (resourcePath.slice(resourcePath.lastIndexOf('.html')) === '.html') return false;
+            if (
+              resourcePath.slice(resourcePath.lastIndexOf('.html')) === '.html'
+            )
+              return false;
             return true;
-          }
+          },
         },
       ],
     }),
@@ -90,12 +93,12 @@ const common = {
       template: path.resolve(__dirname, '../public/panel.html'),
       chunks: ['panel'],
       filename: 'panel.html',
-      inject: true
+      inject: true,
     }),
     new HtmlWebpackPlugin({
       chunks: ['devTools'],
       filename: 'devTools.html',
-      inject: true
+      inject: true,
     }),
     new Dotenv(),
   ],

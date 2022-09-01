@@ -1,7 +1,7 @@
 <script>
-  import tree from "../../app/src/utils/d3TreeRender.js";
+  import tree from "../utils/d3TreeRender";
   import { onMount } from "svelte";
-  import { componentProps } from "../../app/src/utils/store";
+
   let el;
   let width;
   let height;

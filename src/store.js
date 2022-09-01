@@ -1,4 +1,4 @@
-import {writable, get} from 'svelte/store';
+import { writable, get } from 'svelte/store';
 
 export const compCountsStore = writable([]);
 export const compInstancesStore = writable({});

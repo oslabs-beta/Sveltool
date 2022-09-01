@@ -1,0 +1,1 @@
+console.log('Running Sveltool content script');

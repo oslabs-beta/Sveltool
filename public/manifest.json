@@ -5,7 +5,7 @@
   "manifest_version": 3,
   "minimum_chrome_version": "10.0",
   "devtools_page": "./devTools.html",
-  
+
   "action": {
     "default_icon": {
       "16": "./icons/icon-16.png",
@@ -14,31 +14,33 @@
     },
     "default_title": "Sveltool"
   },
-  
+
   "background": {
     "service_worker": "./background.js"
   },
-  
+
   "permissions": ["tabs", "contextMenus"],
-  
-  "web_accessible_resources": [{
-    "resources": ["./contentScript.js"],
-    "matches": ["https://*/*", "http://*/*"]
-  }],
+
+  "web_accessible_resources": [
+    {
+      "resources": ["./contentScript.js"],
+      "matches": ["https://*/*", "http://*/*"]
+    }
+  ],
 
   "externally_connectable": {
     "matches": ["http://localhost/*"]
-},
+  },
 
   "content_security_policy": {
-      "extension pages": "script-src 'self' https://d3js.org/d3.v7.min.js; object-src 'self'" 
-},
+    "extension pages": "script-src 'self' https://d3js.org/d3.v7.min.js; object-src 'self'"
+  },
 
-
-  "content_scripts": [{
-      "matches": ["https://*/*", "http://*/*"], 
-      "js": ["./contentScript.js"], 
-      "run_at": "document_start" 
-}]
-
+  "content_scripts": [
+    {
+      "matches": ["https://*/*", "http://*/*"],
+      "js": ["./contentScript.js"],
+      "run_at": "document_start"
+    }
+  ]
 }
