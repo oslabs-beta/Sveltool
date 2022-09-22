@@ -1,5 +1,5 @@
 <script>
-  import { componentProps } from "../../utils/store.js";
+  import { componentProps } from "../../utils/store";
   export let type;
   let props;
   let propsArray;
@@ -16,7 +16,7 @@
 <div id={`${type.toLowerCase()}-display`}>
   <ul>
     {#each propsArray as prop}
-      <li id={`${type.toLowerCase()}-root`}>{prop}</li>
+      <li id={`${type.toLowerCase()}-root`}>{prop}</li><br/>
     {/each}
   </ul>
 </div>

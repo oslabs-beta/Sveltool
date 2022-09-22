@@ -1,125 +1,203 @@
-import * as d3 from 'd3';
-import { componentProps, componentState } from './store.js';
+import * as d3 from "d3";
+import { componentProps, componentState } from "./store";
 
 /*jshint esversion: 6 */
 (function () {
-  'use strict';
+  "use strict";
 })();
 
 let tree = d3.tree;
 let hierarchy = d3.hierarchy;
 let select = d3.select;
-let data = {
-  name: 'app',
-  props: {
-    firstName: 'Meow',
-    lastName: 'Merry',
-  },
+// let data = {
+//   name: "app",
+//   props: {
+//     firstName: "Meow",
+//     lastName: "Merry",
+//   },
+//   state: {
+//     stateFirstName: "Meow is first state",
+//     stateLastName: "Merry is second state",
+//   },
+//   children: [
+//     {
+//       name: "navbar",
+//       props: {
+//         navBarProps: "We're in the navBar props",
+//         navBarProps2: "We are in the navBar props again",
+//       },
+//       state: {
+//         navBarState: "Here we have the navbarState",
+//       },
+//       children: [
+//         {
+//           name: "logo",
+//           children: false,
+//           props: {
+//             logoProps: "logoProps",
+//             logoProps2: "logoProps2",
+//           },
+//           state: {
+//             logoState: "logoState",
+//           },
+//         },
+//         {
+//           name: "title",
+//           children: false,
+//           props: {
+//             titleProps: "titleProps",
+//             titleProps2: "titleprops2",
+//           },
+//           state: {
+//             titleState: "titleState",
+//           },
+//         },
+//         {
+//           name: "signin",
+//           children: false,
+//           props: {
+//             signInProps: "signInProp",
+//             signInProps2: "Hi I'm signing in",
+//           },
+//           state: {
+//             SignInState: "signInState",
+//           },
+//         },
+//         {
+//           name: "signup",
+//           children: false,
+//           props: {
+//             signUpProps: "signUpProp",
+//             signUpProps2: "Hi I'm signing up",
+//           },
+//           state: {
+//             SignUpState: "signUpState",
+//           },
+//         },
+//       ],
+//     },
+//     {
+//       name: "content",
+//       props: { prop1: "contentProps" },
+//       state: { state1: "contentState" },
+//       children: [
+//         {
+//           name: "test1",
+//           props: { contentProp: "contentProp" },
+//           state: { contentState: "contentState" },
+//           children: [
+//             {
+//               name: "test1a",
+//               props: { test1aprop: "test1aProp" },
+//               state: { test1astate: "test1aState" },
+//             },
+//             {
+//               name: "test1b",
+//               props: { test1bProp: "test1bProp" },
+//               state: { test1bState: "test1bState" },
+//             },
+//             {
+//               name: "test1c",
+//               props: { test1cProp: "test1cProp" },
+//               state: { test1cState: "test1cState" },
+//             },
+//           ],
+//         },
+//         {
+//           name: "test2",
+//           props: { test2props: "test2Props" },
+//           state: { test2state: "test2State" },
+//           children: [
+//             {
+//               name: "test2a",
+//               props: { test2aprop: "test2a_Props" },
+//               state: { test2astate: "test2a_State" },
+//             },
+//             {
+//               name: "test2b",
+//             },
+//             {
+//               name: "test2c",
+//             },
+//           ],
+//         },
+//       ],
+//     },
+//   ],
+// };
+const data = {
+  name: "App",
   state: {
-    stateFirstName: 'Meow is first state',
-    stateLastName: 'Merry is second state',
+    person: {
+      name: "Todo List",
+      age: 20,
+      description:`Let's get play!`,
+    },
   },
   children: [
     {
-      name: 'navbar',
+      name: "Header",
+      // children: [
+      //   {
+      //     name: "Title",
+      //     props: { title: "Header", item: "To do app!" },
+      //     state: { title: "Todo", item: "What will you do each day" },
+      //   },
+      // ],
       props: {
-        navBarProps: "We're in the navBar props",
-        navBarProps2: 'We are in the navBar props again',
+        name: "Todo List",
+        age: 20,
+        description: `Let's get play!`,
       },
-      state: {
-        navBarState: 'Here we have the navbarState',
-      },
-      children: [
-        {
-          name: 'logo',
-          children: false,
-          props: {
-            logoProps: 'logoProps',
-            logoProps2: 'logoProps2',
-          },
-          state: {
-            logoState: 'logoState',
-          },
-        },
-        {
-          name: 'title',
-          children: false,
-          props: {
-            titleProps: 'titleProps',
-            titleProps2: 'titleprops2',
-          },
-          state: {
-            titleState: 'titleState',
-          },
-        },
-        {
-          name: 'signin',
-          children: false,
-          props: {
-            signInProps: 'signInProp',
-            signInProps2: "Hi I'm signing in",
-          },
-          state: {
-            SignInState: 'signInState',
-          },
-        },
-        {
-          name: 'signup',
-          children: false,
-          props: {
-            signUpProps: 'signUpProp',
-            signUpProps2: "Hi I'm signing up",
-          },
-          state: {
-            SignUpState: 'signUpState',
-          },
-        },
-      ],
     },
     {
-      name: 'content',
-      props: { prop1: 'contentProps' },
-      state: { state1: 'contentState' },
+      name: "TodoList",
+      props: {
+        todoList: [
+          { text: "Write my first post", status: true },
+          { text: "Upload the post to the blog", status: false },
+          { text: "Publish the post at Facebook", status: false },
+        ],
+      },
+      state: {
+        newItem: "Work on OSP!!",
+      },
       children: [
-        {
-          name: 'test1',
-          props: { contentProp: 'contentProp' },
-          state: { contentState: 'contentState' },
-          children: [
-            {
-              name: 'test1a',
-              props: { test1aprop: 'test1aProp' },
-              state: { test1astate: 'test1aState' },
-            },
-            {
-              name: 'test1b',
-              props: { test1bProp: 'test1bProp' },
-              state: { test1bState: 'test1bState' },
-            },
-            {
-              name: 'test1c',
-              props: { test1cProp: 'test1cProp' },
-              state: { test1cState: 'test1cState' },
-            },
-          ],
+         {
+          name: "ListItem",
+          props: {
+            item: { text: "Write my first post", status: true },
+            todoList: [
+              { text: "Write my first post", status: true },
+              { text: "Upload the post to the blog", status: false },
+              { text: "Publish the post at Facebook", status: false },
+            ],
+            index: 0,
+          },
         },
         {
-          name: 'test2',
-          props: { test2props: 'test2Props' },
-          state: { test2state: 'test2State' },
-          children: [
-            {
-              name: 'test2a',
-              props: { test2aprop: 'test2a_Props' },
-              state: { test2astate: 'test2a_State' },
-            },
-            {
-              name: 'test2b',
-            },
-            {
-              name: 'test2c',
-            },
-          ],
+          name: "ListItem",
+          props: {
+            item: { text: "Upload the post to the blog", status: false },
+            todoList: [
+              { text: "Write my first post", status: true },
+              { text: "Upload the post to the blog", status: false },
+              { text: "Publish the post at Facebook", status: false },
+            ],
+            index: 1,
+          },
+        },
+        {
+          name: "ListItem",
+          props: {
+            item:  { text: "Publish the post at Facebook", status: false },
+            todoList: [
+              { text: "Write my first post", status: true },
+              { text: "Upload the post to the blog", status: false },
+              { text: "Publish the post at Facebook", status: false },
+            ],
+            index: 2,
+          },
         },
       ],
     },
@@ -139,7 +217,7 @@ class MyTree {
     this.root = null;
     this.svg = null;
     this.colorScheme = null;
-    this.component = '';
+    this.component = "";
   }
 
   $onInit(d3El, width, height, colorScheme) {
@@ -152,7 +230,7 @@ class MyTree {
     this.duration = 600;
     this.tree = tree().size([this.width, this.height]);
     // this.tree = tree().nodeSize([0, 30]);
-    this.component = '';
+    this.component = "";
     this.tree = tree().nodeSize([0, 30]);
     this.root = this.tree(hierarchy(data));
 
@@ -169,13 +247,13 @@ class MyTree {
     this.root.y0 = this.root.y;
 
     this.svg = select(d3El)
-      .append('svg')
-      .attr('width', this.width + this.margin.right + this.margin.left)
-      .attr('height', this.height + this.margin.top + this.margin.bottom)
-      .append('g')
+      .append("svg")
+      .attr("width", this.width + this.margin.right + this.margin.left)
+      .attr("height", this.height + this.margin.top + this.margin.bottom)
+      .append("g")
       .attr(
-        'transform',
-        'translate(' + this.margin.left + ',' + this.margin.top + ')'
+        "transform",
+        "translate(" + this.margin.left + "," + this.margin.top + ")"
       );
 
     this.root.children.forEach(this.collapse);
@@ -204,7 +282,7 @@ class MyTree {
     // );
     //straight
 
-    return 'M' + d.parent.y + ',' + d.parent.x + 'V' + d.x + 'H' + d.y;
+    return "M" + d.parent.y + "," + d.parent.x + "V" + d.x + "H" + d.y;
   };
 
   collapse = (d) => {
@@ -279,14 +357,14 @@ class MyTree {
       n.x = i * this.barHeight;
     });
 
-    d3.select('svg')
+    d3.select("svg")
       .transition()
       .duration(this.duration)
-      .attr('height', this.height);
+      .attr("height", this.height);
 
     // Update the nodes…
     // @ts-ignore
-    let node = this.svg.selectAll('g.node').data(nodesSort, function (d) {
+    let node = this.svg.selectAll("g.node").data(nodesSort, function (d) {
       // @ts-ignore
       return d.id || (d.id = ++this.i);
     });
@@ -294,51 +372,51 @@ class MyTree {
     // Enter any new nodes at the parent's previous position.
     let nodeEnter = node
       .enter()
-      .append('g')
-      .attr('class', 'node')
-      .attr('transform', function () {
-        return 'translate(' + source.y0 + ',' + source.x0 + ')';
+      .append("g")
+      .attr("class", "node")
+      .attr("transform", function () {
+        return "translate(" + source.y0 + "," + source.x0 + ")";
       })
-      .on('click', (e) => {
+      .on("click", (e) => {
         this.click(e);
       });
 
     nodeEnter
-      .append('polygon')
-      .attr('points', function (d) {
-        return d._children ? '0 -5, 0 4, 7 0' : '0 -1, 5 5, 9 -1';
+      .append("polygon")
+      .attr("points", function (d) {
+        return d._children ? "0 -5, 0 4, 7 0" : "0 -1, 5 5, 9 -1";
       })
-      .style('cursor', function (d) {
-        return 'pointer';
+      .style("cursor", function (d) {
+        return "pointer";
       })
-      .attr('fill', '#ff3e00');
+      .attr("fill", "#ff3e00");
 
     // @ts-ignore
 
     nodeEnter
-      .append('text')
+      .append("text")
       // @ts-ignore
-      .attr('x', function (d) {
+      .attr("x", function (d) {
         return d.children || d._children ? 10 : 10;
       })
-      .attr('dy', '.35em')
+      .attr("dy", ".35em")
       // @ts-ignore
-      .attr('text-anchor', function (d) {
-        return d.children || d._children ? 'start' : 'start';
+      .attr("text-anchor", function (d) {
+        return d.children || d._children ? "start" : "start";
       })
       // @ts-ignore
       .text(function (d) {
         if (d.data.name.length > 20) {
-          return d.data.name.substring(0, 20) + '...';
+          return d.data.name.substring(0, 20) + "...";
         } else {
           return d.data.name;
         }
       })
-      .style('fill-opacity', 1e-6)
-      .style('cursor', 'pointer');
+      .style("fill-opacity", 1e-6)
+      .style("cursor", "pointer");
 
     // @ts-ignore
-    nodeEnter.append('svg:title').text(function (d) {
+    nodeEnter.append("svg:title").text(function (d) {
       return d.data.name;
     });
 
@@ -346,55 +424,55 @@ class MyTree {
     let nodeUpdate = node.merge(nodeEnter).transition().duration(this.duration);
 
     // @ts-ignore
-    nodeUpdate.attr('transform', function (d) {
-      return 'translate(' + d.y + ',' + d.x + ')';
+    nodeUpdate.attr("transform", function (d) {
+      return "translate(" + d.y + "," + d.x + ")";
     });
 
     nodeUpdate
-      .select('polygon')
-      .attr('points', function (d) {
-        return d._children ? '0.9 -5, 0.9 4, 7 0' : '0 -3, 5 2, 9 -3';
+      .select("polygon")
+      .attr("points", function (d) {
+        return d._children ? "0.9 -5, 0.9 4, 7 0" : "0 -3, 5 2, 9 -3";
       })
-      .attr('fill', '#ff3e00')
-      .attr('height', '50px')
+      .attr("fill", "#ff3e00")
+      .attr("height", "50px")
       // @ts-ignore
-      .style('cursor', function (d) {
-        return 'pointer';
+      .style("cursor", function (d) {
+        return "pointer";
       });
 
-    nodeUpdate.select('text').style('fill-opacity', 1);
+    nodeUpdate.select("text").style("fill-opacity", 1);
 
     // Transition exiting nodes to the parent's new position (and remove the nodes)
     let nodeExit = node.exit().transition().duration(this.duration);
 
     nodeExit
       // @ts-ignore
-      .attr('transform', function (d) {
-        return 'translate(' + source.y + ',' + source.x + ')';
+      .attr("transform", function (d) {
+        return "translate(" + source.y + "," + source.x + ")";
       })
       .remove();
 
-    nodeExit.select('polygon').attr('points', function (d) {
-      return '0 -5, 0 4, 7 0';
+    nodeExit.select("polygon").attr("points", function (d) {
+      return "0 -5, 0 4, 7 0";
     });
 
-    nodeExit.select('text').style('fill-opacity', 1e-6);
+    nodeExit.select("text").style("fill-opacity", 1e-6);
 
     // Update the links…
     // @ts-ignore
-    let link = this.svg.selectAll('path.link').data(links, function (d) {
+    let link = this.svg.selectAll("path.link").data(links, function (d) {
       // return d.target.id;
-      let id = d.id + '->' + d.parent.id;
+      let id = d.id + "->" + d.parent.id;
       return id;
     });
 
     // Enter any new links at the parent's previous position.
     let linkEnter = link
       .enter()
-      .insert('path', 'g')
-      .attr('class', 'link')
+      .insert("path", "g")
+      .attr("class", "link")
       // @ts-ignore
-      .attr('d', (d) => {
+      .attr("d", (d) => {
         let o = {
           x: source.x0,
           y: source.y0,
@@ -408,7 +486,7 @@ class MyTree {
       .merge(linkEnter)
       .transition()
       .duration(this.duration)
-      .attr('d', this.connector);
+      .attr("d", this.connector);
 
     // // Transition exiting nodes to the parent's new position.
     link
@@ -416,7 +494,7 @@ class MyTree {
       .transition()
       .duration(this.duration)
       // @ts-ignore
-      .attr('d', (d) => {
+      .attr("d", (d) => {
         let o = {
           x: source.x,
           y: source.y,
