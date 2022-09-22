@@ -1,5 +1,6 @@
 <script>
   import { componentProps } from "../../utils/store";
+  import changeState from "../../utils/changeState";
   export let type;
   let props;
   let propsArray;
@@ -7,6 +8,8 @@
   componentProps.subscribe((val) => {
     propsArray = [];
     props = val;
+
+    changeState(props)
     for (const key in props) {
       propsArray = [...propsArray, `${key}: ${JSON.stringify(props[key])}`];
     }

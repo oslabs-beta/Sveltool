@@ -128,7 +128,7 @@ let select = d3.select;
 const data = {
   name: "App",
   state: {
-    person: {
+    person:  {
       name: "Todo List",
       age: 20,
       description:`Let's get play!`,

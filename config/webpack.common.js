@@ -26,6 +26,11 @@ const common = {
     panel: path.resolve(__dirname, '../src/panel.js'),
     devTools: path.resolve(__dirname, '../src/devTools.js'),
   },
+  devServer: {
+      host: 'localhost',
+      port: 8080,
+      headers: { 'Access-Control-Allow-Origin': '*' },
+  },
   output: {
     // the build folder to output bundles and assets in.
     path: PATHS.build,
