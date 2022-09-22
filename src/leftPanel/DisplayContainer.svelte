@@ -10,13 +10,13 @@
   });
   const panelTree = () => {
     component = DisplayPanelTree;
-    props = { treeProp: DisplayPanelTree };
+    // props = { treeProp: DisplayPanelTree };
   };
  
 
   const panelProfiler = () => {
     component = PerformanceProfiler;
-    props = { chartProps: PerformanceProfiler };
+    // props = { chartProps: PerformanceProfiler };
   };
 </script>
 
