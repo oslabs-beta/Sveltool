@@ -4,12 +4,14 @@
   export let type;
   let props;
   let propsArray;
+  let result;
 
   componentProps.subscribe((val) => {
     propsArray = [];
     props = val;
 
-    changeState(props)
+    result = changeState(props);
+  
     for (const key in props) {
       propsArray = [...propsArray, `${key}: ${JSON.stringify(props[key])}`];
     }
@@ -18,8 +20,8 @@
 
 <div id={`${type.toLowerCase()}-display`}>
   <ul>
-    {#each propsArray as prop}
-      <li id={`${type.toLowerCase()}-root`}>{prop}</li><br/>
+    {#each result as prop}
+   {prop}
     {/each}
   </ul>
 </div>
