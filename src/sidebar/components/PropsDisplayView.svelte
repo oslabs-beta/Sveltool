@@ -11,9 +11,7 @@
 
     result = changeState(props);
     if(el) el.innerHTML = '';
-
     result.forEach((element) => {
-
       el.appendChild(element);
       
     });
