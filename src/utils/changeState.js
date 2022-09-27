@@ -31,10 +31,19 @@ function parseList(list) {
 }
 
 function createDivEl(key, value) {
-  const el = document.createElement('div');
-  el.innerText = `${key}: ${value}`;
-  //console.log('createDivEl ==> ', el.innerText)
-  return el;
+  const divParent = document.createElement('div'); 
+  const spanChild1 = document.createElement('span');
+  const spanChild2 = document.createElement('span');
+  spanChild1.innerText = `${key} : `
+  spanChild1.style.fontSize = '12px'
+  spanChild1.style.fontWeight = 500;
+  spanChild2.innerText = value;
+  spanChild2.style.color = '#40b3ff';
+  spanChild2.style.fontSize = '12px'
+  spanChild2.style.fontWeight = 500;
+  spanChild1.appendChild(spanChild2)
+  divParent.appendChild(spanChild1)
+  return divParent;
 }
 
 const changeState = (state) => {
@@ -42,7 +51,6 @@ const changeState = (state) => {
   if (state !== 0 && !state) return state; // checking for flasey values
   if (typeof state === 'object') {
     for (const key in state) {
-      //console.log('state[key]changeState==>', state[key])
       if (Array.isArray(state[key])) {
         result.push(parseList(state[key]));
       } else if (typeof state[key] !== 'object') {

@@ -4,14 +4,6 @@
   import PropsDisplayView from "./PropsDisplayView.svelte";
 
   export let type;
-  // export let data;
-  // $: data;
-  // let props;
-  // componentProps.update((val) => {
-  //   props = val;
-  // });
-
-
 
 </script>
 

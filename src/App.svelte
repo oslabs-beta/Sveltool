@@ -1,10 +1,12 @@
 <script>
   import '../public/app.css';
   import DisplayContainer from "./leftPanel/DisplayContainer.svelte";
-  import SideBarContainer from "./sidebar/SideBarContainer.svelte";
+  import SideBarContainer from "./rightPanel/SideBarContainer.svelte";
 </script>
 
 <main>
+   <div>Left NavToolBar</div>
+   <div>Right NavComponent Display</div>
   <DisplayContainer />
   <SideBarContainer />
 </main>

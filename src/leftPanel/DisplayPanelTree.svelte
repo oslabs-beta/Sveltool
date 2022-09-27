@@ -1,7 +1,6 @@
 <script>
   import tree from "../utils/d3TreeRender.js";
   import { onMount } from "svelte";
-  import { componentProps } from "../utils/store";
   let el;
   let width;
   let height;
@@ -15,7 +14,7 @@
   });
 
   window.matchMedia("(prefers-color-scheme: dark)").addListener(function (e) {
-    colorScheme = e.matches ? "dark" : "light";
+    colorScheme = e.matches ? "dark" : "light"; //#282c34
     tree.update(tree.root, colorScheme);
   });
 </script>

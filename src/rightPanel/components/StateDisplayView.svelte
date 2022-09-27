@@ -1,25 +1,27 @@
 <script>
-  import { componentProps } from '../../utils/store';
+  import { componentState } from "../../utils/store";
   import changeState from '../../utils/changeState';
   export let type;
-  let result;
-  let props;
+  let state;
   let el;
+  let result;
 
-  componentProps.subscribe((val) => {
-    props = val;
-
-    result = changeState(props);
+  componentState.subscribe((val) => {
+    state = val;
+    result = changeState(state);
     if(el) el.innerHTML = '';
-    result.forEach((element) => {
-      el.appendChild(element);
-      
+    if(result){
+
+      result.forEach((element) => {
+      el.appendChild(element)
     });
+    }
+   
   });
+
 </script>
 
 <div id={`${type.toLowerCase()}-display`} bind:this={el} />
-
 <style>
   #state-display,
   #props-display {
