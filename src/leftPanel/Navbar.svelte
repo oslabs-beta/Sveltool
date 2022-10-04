@@ -13,7 +13,7 @@
     display: flex;
 
     border-bottom: 1px solid rgb(96, 99, 104);
-    background-color: rgb(76, 80, 86);
+    background-color: #282c34;
   }
   .nav-bar-tab {
     cursor: pointer;

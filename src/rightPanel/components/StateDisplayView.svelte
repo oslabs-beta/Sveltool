@@ -1,26 +1,27 @@
 <script>
   import { componentState } from "../../utils/store";
+  import changeState from '../../utils/changeState';
   export let type;
   let state;
-  let stateArray;
+  let el;
+  let result;
 
   componentState.subscribe((val) => {
-    stateArray = [];
     state = val;
-    for (const key in state) {
-      stateArray = [...stateArray, `${key}: ${JSON.stringify(state[key])}`];
+    result = changeState(state);
+    if(el) el.innerHTML = '';
+    if(result){
+
+      result.forEach((element) => {
+      el.appendChild(element)
+    });
     }
+   
   });
+
 </script>
 
-<div id={`${type.toLowerCase()}-display`}>
-  <ul>
-    {#each stateArray as prop}
-      <li id={`${type.toLowerCase()}-root`}>{prop}</li>
-    {/each}
-  </ul>
-</div>
-
+<div id={`${type.toLowerCase()}-display`} bind:this={el} />
 <style>
   #state-display,
   #props-display {

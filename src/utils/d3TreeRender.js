@@ -128,7 +128,7 @@ let select = d3.select;
 const data = {
   name: "App",
   state: {
-    person: {
+    person:  {
       name: "Todo List",
       age: 20,
       description:`Let's get play!`,
@@ -170,7 +170,8 @@ const data = {
             todoList: [
               { text: "Write my first post", status: true },
               { text: "Upload the post to the blog", status: false },
-              { text: "Publish the post at Facebook", status: false },
+              { text: "Publish the post at Facebook", status: true },
+              { text: "Post at somethingggggg", status: false },
             ],
             index: 0,
           },
@@ -183,6 +184,8 @@ const data = {
               { text: "Write my first post", status: true },
               { text: "Upload the post to the blog", status: false },
               { text: "Publish the post at Facebook", status: false },
+              { text: "Publish the post at Twitter", status: false },
+              
             ],
             index: 1,
           },

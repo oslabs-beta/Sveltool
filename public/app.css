@@ -83,7 +83,7 @@ g {
 
 @media (prefers-color-scheme: dark) {
   body {
-    background: #4c5056;
+    background: #282c34; 
   }
 
   svg {
