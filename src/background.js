@@ -1,17 +1,15 @@
 //BUILD BACKGROUND.JS FILE FOR EXTENSION ACCESS --> https://developer.chrome.com/docs/extensions/mv2/background_pages/
 
-console.log('Running Sveltool background script');
-
 chrome.runtime.onInstalled.addListener(() => {
-  //add Sveltool to Chrome Devtools context menu
+  //right click Svelcro devtools context menu option
   chrome.contextMenus.create({
-    id: 'Sveltool',
-    title: 'Sveltool',
-    contexts: ['all'],
-  });
+    id: "Svelcro",
+    title: "Svelcro DevTools",
+    contexts: ["all"],
+  }); 
 
   chrome.runtime.onMessage.addListener((msg, sender, response) => {
-    // Recieves msgs from devtool
+    // Recieves msg body from DEVTOOLSscripts
     if (msg) {
       chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
         chrome.tabs.sendMessage(
