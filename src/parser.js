@@ -113,19 +113,25 @@ function getInspectedResources() {
   chrome.devtools.inspectedWindow.getResources((stuff) => {
     // filter Svelte files from "rescources"
 
-    const arrSvelteFiles = stuff.filter(file =>file.url.includes(".svelte"));
-    // console.log("arrSvelteFiles: ", arrSvelteFiles);
-    componentNames = arrSvelteFiles.map(svelteFile => `<${svelteFile.url.slice(
-      svelteFile.url.lastIndexOf("/") + 1,
-      svelteFile.url.lastIndexOf(".")
-    )} />`);
+    const arrSvelteFiles = stuff.filter((file) =>
+      file.url.includes('.svelte? [sm]')
+    );
+    console.log('arrSvelteFiles: ', arrSvelteFiles);
+    const componentNames = arrSvelteFiles.map(
+      (svelteFile) =>
+        `<${svelteFile.url.slice(
+          svelteFile.url.lastIndexOf('/') + 1,
+          svelteFile.url.lastIndexOf('.')
+        )} />`
+    );
 
-    svelteFilesArr.forEach((file) => {
+    arrSvelteFiles.forEach((file) => {
       file.getContent((source) => {
         if (source) {
           console.log('source --> ', source);
           const ast = parse(source);
-          console.log('ast --> ', JSON.stringify(ast));
+          console.log('ast --> ', ast);
+          // createNode(ast)
         }
       });
     });
@@ -133,4 +139,4 @@ function getInspectedResources() {
   });
 }
 
-export default getInspectedResources();
+export default getInspectedResources;
