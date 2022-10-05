@@ -8,12 +8,10 @@
 
   componentProps.subscribe((val) => {
     props = val;
-
     result = changeState(props);
     if(el) el.innerHTML = '';
     if(result){
       result.forEach((element) => {
-      console.log('element-->', element)
       el.appendChild(element);
     });
     }

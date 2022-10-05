@@ -153,11 +153,12 @@ const data = {
     {
       name: "TodoList",
       props: {
-        todoList: [
-          { text: "Write my first post", status: true },
-          { text: "Upload the post to the blog", status: false },
-          { text: "Publish the post at Facebook", status: false },
-        ],
+        item: { text: "Write my first post1", status: true },
+        // todoList: [
+        //   { text: "Write my first post", status: true },
+        //   { text: "Upload the post to the blog", status: false },
+        //   { text: "Publish the post at Facebook", status: false },
+        // ],
       },
       state: {
         newItem: "Work on OSP!!",
@@ -166,27 +167,27 @@ const data = {
          {
           name: "ListItem",
           props: {
-            item: { text: "Write my first post", status: true },
-            todoList: [
-              { text: "Write my first post", status: true },
-              { text: "Upload the post to the blog", status: false },
-              { text: "Publish the post at Facebook", status: true },
-              { text: "Post at somethingggggg", status: false },
-            ],
+            item: { text: "Publish the post at Facebook", status: true },
+            // todoList: [
+            //   { text: "Write my first post", status: true },
+            //   { text: "Upload the post to the blog", status: false },
+            //   { text: "Publish the post at Facebook", status: true },
+            //   { text: "Post at somethingggggg", status: false },
+            // ],
             index: 0,
           },
         },
         {
           name: "ListItem",
           props: {
-            item: { text: "Upload the post to the blog", status: false },
-            todoList: [
-              { text: "Write my first post", status: true },
-              { text: "Upload the post to the blog", status: false },
-              { text: "Publish the post at Facebook", status: false },
-              { text: "Publish the post at Twitter", status: false },
+            item: { text: "Upload the post to the blog3", status: false },
+            // todoList: [
+            //   { text: "Write my first post", status: true },
+            //   { text: "Upload the post to the blog", status: false },
+            //   { text: "Publish the post at Facebook", status: false },
+            //   { text: "Publish the post at Twitter", status: false },
               
-            ],
+            // ],
             index: 1,
           },
         },
@@ -194,11 +195,11 @@ const data = {
           name: "ListItem",
           props: {
             item:  { text: "Publish the post at Facebook", status: false },
-            todoList: [
-              { text: "Write my first post", status: true },
-              { text: "Upload the post to the blog", status: false },
-              { text: "Publish the post at Facebook", status: false },
-            ],
+            // todoList: [
+            //   { text: "Write my first post", status: true },
+            //   { text: "Upload the post to the blog", status: false },
+            //   { text: "Publish the post at Facebook", status: false },
+            // ],
             index: 2,
           },
         },

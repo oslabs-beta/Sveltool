@@ -2,17 +2,18 @@
   import '../public/app.css';
   import DisplayContainer from "./leftPanel/DisplayContainer.svelte";
   import SideBarContainer from "./rightPanel/SideBarContainer.svelte";
+  import NavBarTools from './leftPanel/NavBarTools.svelte'; 
 </script>
-
+<header>
+  <span> <NavBarTools/><div>Right NavComponent Display</div></span>
+ </header>
 <main>
-   <div>Left NavToolBar</div>
-   <div>Right NavComponent Display</div>
   <DisplayContainer />
   <SideBarContainer />
 </main>
 
 <style>
-  main {
+ main {
     height: 100%;
     width: 100%;
     margin: 0;

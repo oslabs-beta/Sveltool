@@ -43,11 +43,12 @@ function createDivEl(key, value) {
   spanChild2.style.fontWeight = 500;
   spanChild1.appendChild(spanChild2)
   divParent.appendChild(spanChild1)
+
   return divParent;
 }
 
 const changeState = (state) => {
-  const result = [];
+  let result = [];
   if (state !== 0 && !state) return state; // checking for flasey values
   if (typeof state === 'object') {
     for (const key in state) {
@@ -55,11 +56,12 @@ const changeState = (state) => {
         result.push(parseList(state[key]));
       } else if (typeof state[key] !== 'object') {
         result.push(createDivEl(key, state[key]));
-      } else result.concat(changeState(state[key])); // nested objects and arrays result = [...result, ...(changeState(state[key]))];
+      } else {
+      result = [...result, ...(changeState(state[key]))]
+      }
     }
   }
 
-  // console.log('result', result);
   return result;
 };
 
