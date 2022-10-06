@@ -33,10 +33,6 @@
   }
 
   button:active:hover {
-    color: inherit;
-  }
-
-  button:active {
     color: #61dafb;
   }
 
