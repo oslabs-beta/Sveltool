@@ -2,17 +2,24 @@
   import '../public/app.css';
   import DisplayContainer from "./leftPanel/DisplayContainer.svelte";
   import SideBarContainer from "./rightPanel/SideBarContainer.svelte";
-  import NavBarTools from './leftPanel/NavBarTools.svelte'; 
+  import NavBarTools from './toolbar/NavBarTools.svelte'; 
+  import DisplayElement from './toolbar/DisplayElement.svelte'
 </script>
 <header>
-  <span> <NavBarTools/><div>Right NavComponent Display</div></span>
+  <NavBarTools/>
+  <DisplayElement component={"APP"} />
  </header>
 <main>
   <DisplayContainer />
   <SideBarContainer />
 </main>
-
 <style>
+header {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+  }
  main {
     height: 100%;
     width: 100%;

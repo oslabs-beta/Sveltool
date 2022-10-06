@@ -9,6 +9,7 @@
 </button>
 
 <style>
+  
   button {
     position: relative;
     z-index: 1;
@@ -18,17 +19,17 @@
     border: none;
     border-radius: 0.167rem /* 2px */;
     background-color: transparent;
-    color: rgb(12, 12, 13);
-    line-height: 0;
+    color: rgba(249, 249, 250, 0.7);
     cursor: pointer;
+    line-height: 0;
   }
 
   button.active {
-    color: rgb(0, 96, 223);
+    color: rgb(141, 157, 179);
   }
 
   button:hover {
-    background-color: rgb(237, 237, 240);
+    color: rgb(237, 237, 240);
   }
 
   button:active:hover {
@@ -36,7 +37,7 @@
   }
 
   button:active {
-    color: rgba(12, 12, 13, 0.8);
+    color: #61dafb;
   }
 
   button:disabled {
@@ -59,9 +60,9 @@
     color: rgba(249, 249, 250, 0.8);
   }
 
-  :global(.dark) button:disabled {
+  /* :global(.dark) button:disabled {
     color: rgba(249, 249, 250, 0.2);
-  }
+  } */
 
   :global(.dark) button:disabled,
   button:disabled {
@@ -74,5 +75,12 @@
     height: 1.333rem;
     vertical-align: middle;
     fill: currentColor;
+  }
+  button :hover(svg) {
+    width: 1.333rem;
+    height: 1.333rem;
+    vertical-align: middle;
+    fill: currentColor;
+    color: #61dafb;
   }
 </style>

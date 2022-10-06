@@ -11,7 +11,7 @@ import Toolbar from "./Toolbar.svelte";
     <PickerButton/>
     <ProfileButton />
     <VisibilityButton />
-    <!-- //<Search /> -->
+    <Search />
 </Toolbar>
    
 

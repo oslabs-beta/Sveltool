@@ -12,6 +12,7 @@
   #props-navbar {
     display: flex;
     align-items: center;
+    border-top: 1px solid rgb(96, 99, 104);
     border-bottom: 1px solid rgb(96, 99, 104);
     height: 35px;
     background-color: #282c34

@@ -33,29 +33,12 @@
         Elements
       </li>
       <li
-        class:checked={$visibility.block}
-        on:click={e => ($visibility.block = !$visibility.block)}
-      >
-        Blocks
-      </li>
-      <li
-        class:checked={$visibility.slot}
-        on:click={e => ($visibility.slot = !$visibility.slot)}
-      >
-        Slots
-      </li>
-      <li
-        class:checked={$visibility.anchor}
-        on:click={e => ($visibility.anchor = !$visibility.anchor)}
-      >
-        Anchors
-      </li>
-      <li
-        class:checked={$visibility.text}
-        on:click={e => ($visibility.text = !$visibility.text)}
-      >
-        Text
-      </li>
+      class:checked={$visibility.element}
+      on:click={e => ($visibility.element = !$visibility.element)}
+    >
+      Text
+    </li>
+
     </ul>
   {/if}
 </Button>
@@ -71,13 +54,15 @@
   }
 
   ul {
+    border: none;
     position: absolute;
     top: 2.667rem /* 32px */;
     left: -1.667rem /* -20px */;
     padding: 0.5rem /* 6px */ 0;
     border: 0.083rem /* 1px */ solid rgb(224, 224, 226);
     border-radius: 0.167rem /* 2px */;
-    background-color: #ffffff;
+    background-color: #4a4a4f;
+    color: #ffffff;
     box-shadow: 0 0.083rem 0.25rem rgba(0, 0, 0, 0.075) !important;
     text-align: left;
     line-height: 1;
@@ -101,7 +86,7 @@
     width: 1.333rem /* 16px */;
     height: 1.333rem /* 16px */;
     border: 0.083rem /* 1px */ solid rgb(224, 224, 226);
-    background-color: #ffffff;
+    background-color: #4a4a4f;
     box-shadow: 0 0.083rem 0.25rem rgba(0, 0, 0, 0.075) !important;
     content: '';
     transform: rotate(45deg);
@@ -114,7 +99,8 @@
   }
 
   li:hover {
-    background-color: rgb(239, 239, 242);
+    background-color: #5c5c61;
+    color: #fff;
   }
 
   li.checked::before {
