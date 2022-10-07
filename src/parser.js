@@ -108,15 +108,15 @@
 
 ////// *************>-----------< START >-----------<************** ///////
 
-function getInspectedResources() {
-  // get all files from current tab
-  chrome.devtools.inspectedWindow.getResources((stuff) => {
-    // filter Svelte files from "rescources"
-    const svelteFilesArr = stuff.filter((file) =>
-      file.url.includes('.svelte')
-    );
-    console.log('Resources from inspected window ==> \n\n', svelteFilesArr);
-  })
-}
+// function getInspectedResources() {
+//   // get all files from current tab
+//   chrome.devtools.inspectedWindow.getResources((stuff) => {
+//     // filter Svelte files from "rescources"
+//     const svelteFilesArr = stuff.filter((file) =>
+//       file.url.includes('.svelte')
+//     );
+//     console.log('Resources from inspected window ==> \n\n', svelteFilesArr);
+//   })
+// }
 
-export default getInspectedResources();
+// export default getInspectedResources();
