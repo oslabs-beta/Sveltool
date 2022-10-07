@@ -1,17 +1,17 @@
 <script>
-import PickerButton from "./PickerButton.svelte";
-import ProfileButton from "./ProfileButton.svelte";
-import VisibilityButton from "./VisibilityButton.svelte";
-import Search from "./Search.svelte";
+// import PickerButton from "./PickerButton.svelte";
+// import ProfileButton from "./ProfileButton.svelte";
+// import VisibilityButton from "./VisibilityButton.svelte";
+// import Search from "./Search.svelte";
 import Toolbar from "./Toolbar.svelte";
 </script>
 
 
 <Toolbar>
-    <PickerButton/>
+    <!-- <PickerButton/>
     <ProfileButton />
     <VisibilityButton />
-    <Search />
+    <Search /> -->
 </Toolbar>
    
 
