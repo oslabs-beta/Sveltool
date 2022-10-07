@@ -1,30 +1,20 @@
 <script>
-  import { startPicker, stopPicker, selectedNode } from '../utils/store.js'
+
   import Button from './Button.svelte'
 
   let active = false
-  let unsub = () => {}
+
 
   function click() {
     if (active) {
       active = false
-      stopPicker()
+    
       return
     }
 
-    unsub()
-    unsub = selectedNode.subscribe(node => {
-      if (!active) return
-      active = false
-      unsub()
-
-      setTimeout(
-        () => node.dom && node.dom.scrollIntoView({ block: 'center' }),
-        120
-      )
-    })
+  
     active = true
-    startPicker()
+   
   }
 </script>
 
