@@ -57,7 +57,7 @@
   <Button on:click={prev} disabled={!results.length}>
     <div class="prev" />
   </Button> -->
-  <input placeholder="Search"  />
+  <input placeholder="Search"  class="search" />
 
   <Button type="submit" >
     <div class="next" />
@@ -85,7 +85,7 @@
     outline: none;
     border: none;
     background: none;
-    color: inherit;
+    color: white;
     font-size: inherit;
   }
 
