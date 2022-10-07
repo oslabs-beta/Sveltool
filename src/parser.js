@@ -31,17 +31,18 @@ function parser() {
         if (source) {
           // console.log('source --> ', source);
           const ast = parse(source);
-          // console.log('ast --> ', ast);
+          console.log('ast --> ', ast);
           walk(ast, {
             enter(ASTnode, parent, prop, index) {
               // find component dependencies
-              if(ASTnode.type === 'ImportDeclaration' && ASTnode.source.value.includes(".svelte")) {
-                const dependencyName = `<${ASTnode.source.value.slice(
-                  ASTnode.source.value.lastIndexOf("/") + 1,
-                  ASTnode.source.value.lastIndexOf(".")
-                )} />`;
-                // console.log('Dependency ==> ', dependencyName);
-                dependencies[currentComponent] ? dependencies[currentComponent].add(dependencyName) : dependencies[currentComponent] = new Set([dependencyName]);
+              if(ASTnode.type === 'InlineComponent') {
+                // const dependencyName = `<${ASTnode.source.value.slice(
+                //   ASTnode.source.value.lastIndexOf("/") + 1,
+                //   ASTnode.source.value.lastIndexOf(".")
+                // )} />`;
+                const dependencyName = `<${ASTnode.name} />`
+                console.log('Dependency ==> ', dependencyName);
+                dependencies[currentComponent] ? dependencies[currentComponent].push(dependencyName) : dependencies[currentComponent] = [dependencyName];
               }
               // find state
               if (ASTnode.hasOwnProperty('declarations')) {
