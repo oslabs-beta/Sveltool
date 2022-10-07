@@ -3,15 +3,18 @@
   import DisplayContainer from "./leftPanel/DisplayContainer.svelte";
   import SideBarContainer from "./rightPanel/SideBarContainer.svelte";
   import NavBarTools from './toolbar/NavBarTools.svelte'; 
-  import DisplayElement from './toolbar/DisplayElement.svelte'
+  import DisplayElement from './toolbar/DisplayElement.svelte';
+ 
 </script>
 <header>
   <NavBarTools/>
   <DisplayElement component={"APP"} />
  </header>
 <main>
+ 
   <DisplayContainer />
   <SideBarContainer />
+ 
 </main>
 <style>
 header {

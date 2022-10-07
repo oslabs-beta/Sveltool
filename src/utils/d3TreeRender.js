@@ -168,12 +168,12 @@ const data = {
           name: 'ListItem',
           props: {
             item: { text: 'Publish the post at Facebook', status: true },
-            // todoList: [
-            //   { text: "Write my first post", status: true },
-            //   { text: "Upload the post to the blog", status: false },
-            //   { text: "Publish the post at Facebook", status: true },
-            //   { text: "Post at somethingggggg", status: false },
-            // ],
+            todoList: [
+              { text: "Write my first post", status: true },
+              { text: "Upload the post to the blog", status: false },
+              { text: "Publish the post at Facebook", status: true },
+              { text: "Post at somethingggggg", status: false },
+            ],
             index: 0,
           },
         },

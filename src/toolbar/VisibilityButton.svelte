@@ -22,7 +22,9 @@
       <span />
       <li
         class:checked={$visibility.component}
-        on:click={e => ($visibility.component = !$visibility.component)}
+        on:click={e => {
+          ($visibility.component = !$visibility.component)}
+        }
       >
         Components
       </li>
@@ -33,12 +35,11 @@
         Elements
       </li>
       <li
-      class:checked={$visibility.element}
-      on:click={e => ($visibility.element = !$visibility.element)}
+      class:checked={$visibility.text}
+      on:click={e => ($visibility.text = !$visibility.text)}
     >
       Text
     </li>
-
     </ul>
   {/if}
 </Button>
