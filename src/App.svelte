@@ -2,6 +2,9 @@
   import '../public/app.css';
   import DisplayContainer from "./leftPanel/DisplayContainer.svelte";
   import SideBarContainer from "./sidebar/SideBarContainer.svelte";
+  import parser from './parser';
+
+  parser();
 </script>
 
 <main>
