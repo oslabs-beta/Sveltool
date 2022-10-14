@@ -1,4 +1,4 @@
-import { writable, get } from 'svelte/store';
+import { writable } from 'svelte/store';
 
 export const componentProps = writable({});
 export const componentState = writable({});
@@ -19,3 +19,11 @@ export const rootNodes = writable([]);
 export const searchValue = writable('');
 export const profilerEnabled = writable(false);
 export const profileFrame = writable({});
+
+export const treeData = writable({
+  edited: false,
+  initData: {},
+  editData: {},
+});
+
+export const currentComponent = writable('');

@@ -1,13 +1,23 @@
 <script>
-   export let component
+
+
+   import {currentComponent} from '../utils/store'
+
+  let component
+    currentComponent.subscribe((d)=>{
+    component = d
+   })
+
+
 
 </script>
-<div class="svelt-display-element">{component}</div>
+<div class="svelte-display-element">{component}</div>
 <style>
-    .svelt-display-element{
+    .svelte-display-element{
     color: rgb(64, 179, 255);
     font-size: 12px;
     font-weight: 500;
     padding: 5px;
+    text-transform: uppercase;
     }
 </style>
