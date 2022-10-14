@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { componentProps, componentState } from './store';
+import { componentProps, componentState, currentComponent } from './store';
 
 /*jshint esversion: 6 */
 (function () {
@@ -9,207 +9,9 @@ import { componentProps, componentState } from './store';
 let tree = d3.tree;
 let hierarchy = d3.hierarchy;
 let select = d3.select;
-// let data = {
-//   name: "app",
-//   props: {
-//     firstName: "Meow",
-//     lastName: "Merry",
-//   },
-//   state: {
-//     stateFirstName: "Meow is first state",
-//     stateLastName: "Merry is second state",
-//   },
-//   children: [
-//     {
-//       name: "navbar",
-//       props: {
-//         navBarProps: "We're in the navBar props",
-//         navBarProps2: "We are in the navBar props again",
-//       },
-//       state: {
-//         navBarState: "Here we have the navbarState",
-//       },
-//       children: [
-//         {
-//           name: "logo",
-//           children: false,
-//           props: {
-//             logoProps: "logoProps",
-//             logoProps2: "logoProps2",
-//           },
-//           state: {
-//             logoState: "logoState",
-//           },
-//         },
-//         {
-//           name: "title",
-//           children: false,
-//           props: {
-//             titleProps: "titleProps",
-//             titleProps2: "titleprops2",
-//           },
-//           state: {
-//             titleState: "titleState",
-//           },
-//         },
-//         {
-//           name: "signin",
-//           children: false,
-//           props: {
-//             signInProps: "signInProp",
-//             signInProps2: "Hi I'm signing in",
-//           },
-//           state: {
-//             SignInState: "signInState",
-//           },
-//         },
-//         {
-//           name: "signup",
-//           children: false,
-//           props: {
-//             signUpProps: "signUpProp",
-//             signUpProps2: "Hi I'm signing up",
-//           },
-//           state: {
-//             SignUpState: "signUpState",
-//           },
-//         },
-//       ],
-//     },
-//     {
-//       name: "content",
-//       props: { prop1: "contentProps" },
-//       state: { state1: "contentState" },
-//       children: [
-//         {
-//           name: "test1",
-//           props: { contentProp: "contentProp" },
-//           state: { contentState: "contentState" },
-//           children: [
-//             {
-//               name: "test1a",
-//               props: { test1aprop: "test1aProp" },
-//               state: { test1astate: "test1aState" },
-//             },
-//             {
-//               name: "test1b",
-//               props: { test1bProp: "test1bProp" },
-//               state: { test1bState: "test1bState" },
-//             },
-//             {
-//               name: "test1c",
-//               props: { test1cProp: "test1cProp" },
-//               state: { test1cState: "test1cState" },
-//             },
-//           ],
-//         },
-//         {
-//           name: "test2",
-//           props: { test2props: "test2Props" },
-//           state: { test2state: "test2State" },
-//           children: [
-//             {
-//               name: "test2a",
-//               props: { test2aprop: "test2a_Props" },
-//               state: { test2astate: "test2a_State" },
-//             },
-//             {
-//               name: "test2b",
-//             },
-//             {
-//               name: "test2c",
-//             },
-//           ],
-//         },
-//       ],
-//     },
-//   ],
-// };
-const data = {
-  name: 'App',
-  state: {
-    person: {
-      name: 'Todo List',
-      age: 20,
-      description: `Let's get play!`,
-    },
-  },
-  children: [
-    {
-      name: 'Header',
-      // children: [
-      //   {
-      //     name: "Title",
-      //     props: { title: "Header", item: "To do app!" },
-      //     state: { title: "Todo", item: "What will you do each day" },
-      //   },
-      // ],
-      props: {
-        name: 'Todo List',
-        age: 20,
-        description: `Let's get play!`,
-      },
-    },
-    {
-      name: 'TodoList',
-      props: {
-        item: { text: 'Write my first post1', status: true },
-        // todoList: [
-        //   { text: "Write my first post", status: true },
-        //   { text: "Upload the post to the blog", status: false },
-        //   { text: "Publish the post at Facebook", status: false },
-        // ],
-      },
-      state: {
-        newItem: 'Work on OSP!!',
-      },
-      children: [
-        {
-          name: 'ListItem',
-          props: {
-            item: { text: 'Publish the post at Facebook', status: true },
-            todoList: [
-              { text: "Write my first post", status: true },
-              { text: "Upload the post to the blog", status: false },
-              { text: "Publish the post at Facebook", status: true },
-              { text: "Post at somethingggggg", status: false },
-            ],
-            index: 0,
-          },
-        },
-        {
-          name: 'ListItem',
-          props: {
-            item: { text: 'Upload the post to the blog3', status: false },
-            // todoList: [
-            //   { text: "Write my first post", status: true },
-            //   { text: "Upload the post to the blog", status: false },
-            //   { text: "Publish the post at Facebook", status: false },
-            //   { text: "Publish the post at Twitter", status: false },
-
-            // ],
-            index: 1,
-          },
-        },
-        {
-          name: 'ListItem',
-          props: {
-            item: { text: 'Publish the post at Facebook', status: false },
-            // todoList: [
-            //   { text: "Write my first post", status: true },
-            //   { text: "Upload the post to the blog", status: false },
-            //   { text: "Publish the post at Facebook", status: false },
-            // ],
-            index: 2,
-          },
-        },
-      ],
-    },
-  ],
-};
 
 class MyTree {
-  constructor() {
+  constructor(data) {
     this.margin = { left: null, right: null, top: null, bottom: null };
     this.width = null;
     this.height = null;
@@ -222,6 +24,7 @@ class MyTree {
     this.svg = null;
     this.colorScheme = null;
     this.component = '';
+    this.data = data;
   }
 
   $onInit(d3El, width, height, colorScheme) {
@@ -236,7 +39,7 @@ class MyTree {
     // this.tree = tree().nodeSize([0, 30]);
     this.component = '';
     this.tree = tree().nodeSize([0, 30]);
-    this.root = this.tree(hierarchy(data));
+    this.root = this.tree(hierarchy(this.data));
 
     this.root.each((d) => {
       // @ts-ignore
@@ -260,7 +63,9 @@ class MyTree {
         'translate(' + this.margin.left + ',' + this.margin.top + ')'
       );
 
-    this.root.children.forEach(this.collapse);
+    if (this.root.children) {
+      this.root.children.forEach(this.collapse);
+    }
     this.update(this.root, colorScheme);
   }
 
@@ -329,6 +134,10 @@ class MyTree {
     componentState.update((state) => {
       state = d.data.state;
       return state;
+    });
+
+    currentComponent.update(() => {
+      return d.data.name;
     });
 
     if (d.children) {
@@ -410,7 +219,7 @@ class MyTree {
       })
       // @ts-ignore
       .text(function (d) {
-        if (d.data.name.length > 20) {
+        if (d.data.name && d.data.name.length > 20) {
           return d.data.name.substring(0, 20) + '...';
         } else {
           return d.data.name;
@@ -516,6 +325,4 @@ class MyTree {
   };
 }
 
-let myTree = new MyTree();
-
-export default myTree;
+export default MyTree;
