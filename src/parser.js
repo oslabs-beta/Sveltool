@@ -1,105 +1,117 @@
 import { parse, walk } from 'svelte/compiler';
 
-function parser() {
+async function newParser() {
   const dependencies = {};
   const state = {};
   const props = {};
   const output = {};
   const checked = {};
+  const usedComponents = [];
+  
+  const arrSvelteFiles = await new Promise((resolve, reject) => {
+    chrome.devtools.inspectedWindow.getResources((resources) => {
+      const filteredResources = resources.filter(file => file.url.includes('.svelte'));
+      if (filteredResources) resolve(filteredResources);
+      else reject('No Svelte Resources Found');
+    })
+  });
 
-  // get all resources being served
-  chrome.devtools.inspectedWindow.getResources((stuff) => {
-    // filter Svelte files from rescources
-    // console.log('All resources ==> ', stuff);
-    const arrSvelteFiles = stuff.filter((file) => file.url.includes('.svelte'));
-    // console.log('arrSvelteFiles: ', arrSvelteFiles);
+  console.log('Found Svelte Files ==> ', arrSvelteFiles);
 
-    // Save a list of all Svelte component names
-    const componentNames = arrSvelteFiles.map(
-      (svelteFile) =>
-        `<${svelteFile.url.slice(
-          svelteFile.url.lastIndexOf('/') + 1,
-          svelteFile.url.lastIndexOf('.')
-        )} />`
-    );
+  const componentNames = arrSvelteFiles.map(
+    svelteFile => `<${svelteFile.url.slice(
+      svelteFile.url.lastIndexOf('/') + 1,
+      svelteFile.url.lastIndexOf('.')
+    )} />`
+  )
 
-    // Go through each component to list their dependencies, props, and state
-    arrSvelteFiles.forEach((file, index) => {
+  console.log('Component Names ==> ', componentNames);
+
+  // Define function to pull file content from file array
+  async function getContent(arrFiles) {
+    const content = await arrFiles.map(async (file, index) => {
       const currentComponent = componentNames[index];
-
+  
       // Only check each component once no matter how many copies of each .svelte file there are
-      if (checked[currentComponent]) return;
+      if(checked[currentComponent]) return;
       checked[currentComponent] = true;
-
-      // console.log('File ==> ', file);
+      usedComponents.push(currentComponent);
+  
       // get file content for each Svelte file and process it
-      file.getContent((source) => {
-        if (source) {
-          // console.log('source --> ', source);
-
-          // convert source to ast
-          const ast = parse(source);
-          // console.log('ast --> ', ast);
-
-          // walk ast and output dependencies, props, and state
-          walk(ast, {
-            enter(ASTnode, parent, prop, index) {
-              // find component dependencies
-              if (ASTnode.type === 'InlineComponent') {
-                const dependencyName = `<${ASTnode.name} />`;
-                // console.log('Dependency ==> ', dependencyName);
-                dependencies[currentComponent]
-                  ? dependencies[currentComponent].push(dependencyName)
-                  : (dependencies[currentComponent] = [dependencyName]);
-              }
-              // find state
-              if (ASTnode.hasOwnProperty('declarations')) {
-                // console.log('AST node declarations ==> ',
-                // ASTnode.declarations);
-              }
-            },
-          });
-        }
+      const output = await new Promise((resolve, reject) => {
+        file.getContent(source => {
+          if(source) resolve(source);
+        });
       });
+      return output;
+    });
+    return Promise.all(content);
+  };
+
+  // Process file array into content array
+  let arrSvelteContent = await getContent(arrSvelteFiles);  
+  // Filter components with no content or duplicate components
+  arrSvelteContent = arrSvelteContent.filter(content => {if(content) return content});
+  console.log('Svelte Content Array', arrSvelteContent);
+
+  // Iterate over each file content object and process it
+  arrSvelteContent.forEach((content, index) => {
+    const currentComponent = usedComponents[index];
+
+    // Parse the file contents and build an AST
+    const ast = parse(content);
+    // console.log('AST ==> ', ast);
+
+    // Walk the AST and output dependencies, props, and state
+    walk(ast, {
+      enter(ASTnode, parent, prop, index) {
+        // find component dependencies
+        if (ASTnode.type === 'InlineComponent') {
+          const dependencyName = `<${ASTnode.name} />`;
+          // console.log('Dependency ==> ', dependencyName);
+          dependencies[currentComponent]
+            ? dependencies[currentComponent].push(dependencyName)
+            : (dependencies[currentComponent] = [dependencyName]);
+        }
+        // find state
+        if (ASTnode.hasOwnProperty('declarations')) {
+          console.log('AST node declarations ==> ',
+          ASTnode.declarations);
+        }
+      },
     });
   });
-  console.log('Dependencies Object ==> ', dependencies);
 
-  // find the root component
-  let rootComponent;
-  const allComponents = Object.entries(dependencies);
-  console.log('All Components ==> ', allComponents);
-  while (!rootComponent) {
-    const curr = allComponents.shift()[0];
-    console.log('Current element ==> ', curr);
-    let foundRoot = true;
-    allComponents.forEach((el) => {
-      if (el[1].includes(curr)) foundRoot = false;
-    });
-    if (foundRoot) rootComponent = curr;
-    else allComponents.push(curr);
+  const newArray = [];
+  console.log('newArray empty ==> ', newArray);
+
+  console.log('Parent > Dependencies List ==> ', dependencies);
+  const allComponents = [];
+  console.log('AllComponents Empty ==> ', allComponents);
+  for (const key in dependencies) {
+    console.log('continuity check ==> ', dependencies);
+    console.log('key ==> ', key);
+    console.log('value => ', dependencies[key]);
+    console.log('before ==> ', newArray);
+    newArray.push([key, dependencies[key]]);
+    console.log('after ==> ', newArray);
   }
-  console.log('Root component ==> ', rootComponent);
+
+  // // find the root component
+  // let rootComponent;
+  // // const allComponents = Object.entries(dependencies);
+  // console.log('All Components ==> ', allComponents);
+  // while (!rootComponent) {
+  //   const curr = allComponents.shift()[0];
+  //   console.log('Current element ==> ', curr);
+  //   let foundRoot = true;
+  //   allComponents.forEach((el) => {
+  //     if (el[1].includes(curr)) foundRoot = false;
+  //   });
+  //   if (foundRoot) rootComponent = curr;
+  //   else allComponents.push(curr);
+  // }
+  // console.log('Root component ==> ', rootComponent);
 }
 
-// Test for JSFiddle
-
-// const dependencies = {'<List />': ['<Item />'], '<App />': ["<List />", "<List />", "<Footer />"]}
-
-// let rootComponent;
-// console.log('Dependencies ==> ', dependencies);
-// const allComponents = Object.entries(dependencies);
-// console.log('All Components ==> ', allComponents);
-// while (!rootComponent) {
-//   const curr = allComponents.shift()[0];
-//   console.log('Current element ==> ', curr);
-//   let foundRoot = true;
-//   allComponents.forEach(el => {
-//     if (el[1].includes(curr)) foundRoot = false;
-//   })
-//   if (foundRoot) rootComponent = curr;
-//   else allComponents.push(curr);
-// }
-// console.log('Root component ==> ', rootComponent);
-
-export default parser;
+export default newParser;
