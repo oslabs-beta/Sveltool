@@ -82,36 +82,48 @@ async function newParser() {
     });
   });
 
-  const newArray = [];
-  console.log('newArray empty ==> ', newArray);
-
   console.log('Parent > Dependencies List ==> ', dependencies);
+
+  const newArray = [];
+  // console.log('newArray empty ==> ', newArray);
+
   const allComponents = [];
-  console.log('AllComponents Empty ==> ', allComponents);
+  // console.log('AllComponents Empty ==> ', allComponents);
+
   for (const key in dependencies) {
-    console.log('continuity check ==> ', dependencies);
-    console.log('key ==> ', key);
-    console.log('value => ', dependencies[key]);
-    console.log('before ==> ', newArray);
-    newArray.push([key, dependencies[key]]);
-    console.log('after ==> ', newArray);
+    // console.log('continuity check ==> ', dependencies);
+    // console.log('key ==> ', key);
+    // console.log('value => ', dependencies[key]);
+    // console.log('before ==> ', newArray);
+    allComponents.push([key, dependencies[key]]);
+    // console.log('after ==> ', newArray);
   }
 
-  // // find the root component
-  // let rootComponent;
-  // // const allComponents = Object.entries(dependencies);
+  // find the root component
+  let rootComponent;
+  // const allComponents = Object.entries(dependencies);
   // console.log('All Components ==> ', allComponents);
-  // while (!rootComponent) {
-  //   const curr = allComponents.shift()[0];
-  //   console.log('Current element ==> ', curr);
-  //   let foundRoot = true;
-  //   allComponents.forEach((el) => {
-  //     if (el[1].includes(curr)) foundRoot = false;
-  //   });
-  //   if (foundRoot) rootComponent = curr;
-  //   else allComponents.push(curr);
-  // }
-  // console.log('Root component ==> ', rootComponent);
+  while (!rootComponent) {
+    const curr = allComponents.shift()[0];
+    // console.log('Current element ==> ', curr);
+    let foundRoot = true;
+    allComponents.forEach((el) => {
+      if (el[1].includes(curr)) foundRoot = false;
+    });
+    if (foundRoot) rootComponent = curr;
+    else allComponents.push(curr);
+  }
+  console.log('Root component ==> ', rootComponent);
+  console.log('Parent > Dependencies List continuity check ==> ', dependencies);
+
+  const outputJSON = {
+    name: rootComponent,
+    state: {},
+    props: {},
+    children: [],
+  };
+
+
 }
 
 export default newParser;
