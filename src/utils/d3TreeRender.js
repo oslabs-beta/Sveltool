@@ -1,9 +1,8 @@
 import * as d3 from "d3";
 import { componentProps, componentState } from "./store";
-import parser from '../parser.js';
 
 /*jshint esversion: 6 */
-(async function () {
+(function () {
   "use strict";
 })();
 
@@ -11,7 +10,7 @@ let tree = d3.tree;
 let hierarchy = d3.hierarchy;
 let select = d3.select;
 
-const data = await parser();
+const data = {name: '<App />'};
 
 class MyTree {
   constructor() {

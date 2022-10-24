@@ -74,9 +74,9 @@ async function parser() {
             : (dependencies[currentComponent] = [dependencyName]);
         }
         // find state
-        if (ASTnode.hasOwnProperty('declarations')) {
-          console.log('AST node declarations ==> ',
-          ASTnode.declarations);
+        if (ASTnode.type === 'VariableDeclarator') {
+          // console.log('AST node declarations ==> ', ASTnode.init.value);
+          props[currentComponent] = Object.assign(props[currentComponent], )
         }
       },
     });
