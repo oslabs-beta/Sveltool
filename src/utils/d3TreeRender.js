@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 import { componentProps, componentState } from "./store";
-import SvelteData from '../createD3DataObject.js';
+import parser from '../parser.js';
 
 /*jshint esversion: 6 */
 (async function () {
@@ -11,7 +11,7 @@ let tree = d3.tree;
 let hierarchy = d3.hierarchy;
 let select = d3.select;
 
-const data = await new SvelteData();
+const data = await parser();
 
 class MyTree {
   constructor() {

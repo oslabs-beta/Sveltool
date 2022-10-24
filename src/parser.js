@@ -1,4 +1,5 @@
 import { parse, walk } from 'svelte/compiler';
+import D3DataObject from './createD3DataObject';
 
 async function parser() {
   const dependencies = {};
@@ -114,7 +115,7 @@ async function parser() {
   }
   // console.log('Root component ==> ', rootComponent);
   // console.log('Parent > Dependencies List continuity check ==> ', dependencies);
-
+  return new D3DataObject(rootComponent, props, state).data;
 }
 
 export default parser;
