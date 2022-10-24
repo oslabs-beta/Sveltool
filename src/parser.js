@@ -4,7 +4,6 @@ import D3DataObject from './createD3DataObject';
 async function parser() {
   const dependencies = {};
   const state = {};
-  const props = {};
   const checked = {};
   const usedComponents = [];
   
@@ -67,28 +66,34 @@ async function parser() {
       enter(ASTnode, parent, prop, index) {
         // find component dependencies
         if (ASTnode.type === 'InlineComponent') {
-          const dependencyName = `<${ASTnode.name} />`;
-          // console.log('Dependency ==> ', dependencyName);
+          const dependencyValue = {};
+          dependencyValue.name = `<${ASTnode.name} />`;
+          // find props
+          if (ASTnode.attributes[0]) {
+            const foundProps = {};
+            ASTnode.attributes.forEach(el => {
+              foundProps[el.name] = el.value[0].data;
+            })
+            dependencyValue.props = foundProps;
+          }
           dependencies[currentComponent]
-            ? dependencies[currentComponent].push(dependencyName)
-            : (dependencies[currentComponent] = [dependencyName]);
+            ? dependencies[currentComponent].push(dependencyValue)
+            : (dependencies[currentComponent] = [dependencyValue]);
+            
+          
         }
-        // find state
-        if (ASTnode.type === 'VariableDeclarator') {
-          // console.log('AST node declarations ==> ', ASTnode.init.value);
-          props[currentComponent] = Object.assign(props[currentComponent], )
-        }
+       
       },
     });
   });
 
-  // console.log('Parent > Dependencies List ==> ', dependencies);
+  console.log('Parent > Dependencies List ==> ', dependencies);
 
   const newArray = [];
   // console.log('newArray empty ==> ', newArray);
 
   const allComponents = [];
-  // console.log('AllComponents Empty ==> ', allComponents);
+  console.log('AllComponents Empty ==> ', allComponents);
 
   for (const key in dependencies) {
     // console.log('continuity check ==> ', dependencies);
@@ -102,20 +107,26 @@ async function parser() {
   // find the root component
   let rootComponent;
   // const allComponents = Object.entries(dependencies);
-  // console.log('All Components ==> ', allComponents);
+  console.log('All Components ==> ', allComponents);
   while (!rootComponent) {
-    const curr = allComponents.shift()[0];
+    const curr = allComponents.shift();
+    const currName = curr[0];
     // console.log('Current element ==> ', curr);
     let foundRoot = true;
-    allComponents.forEach((el) => {
-      if (el[1].includes(curr)) foundRoot = false;
+    allComponents.forEach(comp => {
+      comp[1].forEach(dep => {
+        const {name} = dep;
+        if (name === currName) foundRoot = false;
+      })
     });
-    if (foundRoot) rootComponent = curr;
-    else allComponents.push(curr);
+    if (foundRoot) rootComponent = currName;
+    allComponents.push(curr);
   }
-  // console.log('Root component ==> ', rootComponent);
+  console.log('Root component ==> ', rootComponent);
   // console.log('Parent > Dependencies List continuity check ==> ', dependencies);
-  return new D3DataObject(rootComponent, props, state).data;
+  const output = new D3DataObject(rootComponent, dependencies, state);
+  console.log('Parser Output ==> ', output.data);
+  return output.data;
 }
 
 export default parser;
