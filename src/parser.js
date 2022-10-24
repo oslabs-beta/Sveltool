@@ -1,10 +1,9 @@
 import { parse, walk } from 'svelte/compiler';
 
-async function newParser() {
+async function parser() {
   const dependencies = {};
   const state = {};
   const props = {};
-  const output = {};
   const checked = {};
   const usedComponents = [];
   
@@ -60,7 +59,7 @@ async function newParser() {
 
     // Parse the file contents and build an AST
     const ast = parse(content);
-    // console.log('AST ==> ', ast);
+    console.log('AST ==> ', ast);
 
     // Walk the AST and output dependencies, props, and state
     walk(ast, {
@@ -82,7 +81,7 @@ async function newParser() {
     });
   });
 
-  console.log('Parent > Dependencies List ==> ', dependencies);
+  // console.log('Parent > Dependencies List ==> ', dependencies);
 
   const newArray = [];
   // console.log('newArray empty ==> ', newArray);
@@ -113,17 +112,9 @@ async function newParser() {
     if (foundRoot) rootComponent = curr;
     else allComponents.push(curr);
   }
-  console.log('Root component ==> ', rootComponent);
-  console.log('Parent > Dependencies List continuity check ==> ', dependencies);
-
-  const outputJSON = {
-    name: rootComponent,
-    state: {},
-    props: {},
-    children: [],
-  };
-
+  // console.log('Root component ==> ', rootComponent);
+  // console.log('Parent > Dependencies List continuity check ==> ', dependencies);
 
 }
 
-export default newParser;
+export default parser;
