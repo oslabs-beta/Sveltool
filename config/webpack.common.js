@@ -9,8 +9,15 @@ const Dotenv = require('dotenv-webpack');
 
 const PATHS = require('./paths');
 
+const infoColor = (_message) => {
+  return `\u001b[1m\u001b[34m${_message}\u001b[39m\u001b[22m`;
+};
+
 // used in the module rules and in the stats exlude list
 const IMAGE_TYPES = /\.(png|jpe?g|gif|svg)$/i;
+
+const mode = process.env.mode || 'development';
+const prod = mode === 'production';
 
 // To re-use webpack configuration across templates,
 // CLI maintains a common webpack configuration file - `webpack.common.js`.
@@ -20,6 +27,44 @@ const common = {
   entry: {
     panel: path.resolve(__dirname, '../src/panel.js'),
     devTools: path.resolve(__dirname, '../src/devTools.js'),
+  },
+  devServer: {
+    host: 'localhost',
+    port: 8080,
+    headers: { 'Access-Control-Allow-Origin': '*' },
+
+    open: true,
+    https: false,
+    allowedHosts: 'all',
+    hot: false,
+    watchFiles: ['src/**', '/public/panel.html'],
+    static: {
+      watch: true,
+      directory: path.join(__dirname, '../public'),
+    },
+    client: {
+      logging: 'none',
+      overlay: true,
+      progress: false,
+    },
+    setupMiddlewares: function (middlewares, devServer) {
+      console.log(
+        '------------------------------------------------------------'
+      );
+      console.log(devServer.options.host);
+      const port = devServer.options.port;
+      const https = devServer.options.https ? 's' : '';
+      const domain1 = `http${https}://${devServer.options.host}:${port}`;
+      const domain2 = `http${https}://localhost:${port}`;
+
+      console.log(
+        `Project running at:\n  - ${infoColor(domain1)}\n  - ${infoColor(
+          domain2
+        )}`
+      );
+
+      return middlewares;
+    },
   },
   output: {
     // the build folder to output bundles and assets in.
@@ -34,12 +79,27 @@ const common = {
     assets: true,
     excludeAssets: [IMAGE_TYPES],
   },
+  resolve: {
+    alias: {
+      svelte: path.resolve('node_modules', 'svelte'),
+    },
+    extensions: ['.mjs', '.js', '.svelte'],
+    mainFields: ['svelte', 'browser', 'module', 'main'],
+  },
   module: {
     rules: [
       // Help webpack in understanding CSS files imported in .js files
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+        ],
       },
       // Check for images imported in .js files and
       {
@@ -56,9 +116,21 @@ const common = {
       },
       //Allows use of svelte
       {
-        test: /\.svelte$/,
+        test: /\.(svelte)$/,
         use: {
           loader: 'svelte-loader',
+          options: {
+            compilerOptions: {
+              dev: !prod,
+            },
+            emitCss: prod,
+          },
+        },
+      },
+      {
+        test: /node_modules\/svelte\/.*\.mjs$/,
+        resolve: {
+          fullySpecified: false,
         },
       },
     ],

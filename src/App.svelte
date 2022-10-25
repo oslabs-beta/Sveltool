@@ -1,24 +1,34 @@
 <script>
   import '../public/app.css';
   import DisplayContainer from "./leftPanel/DisplayContainer.svelte";
-  import SideBarContainer from "./sidebar/SideBarContainer.svelte";
-  import parser from './parser';
+  import SideBarContainer from "./rightPanel/SideBarContainer.svelte";
+  import NavBarTools from './toolbar/NavBarTools.svelte';
+  import DisplayElement from './toolbar/DisplayElement.svelte';
 
-  console.log('DATA ==> ', parser());
 </script>
-
+<header>
+  <NavBarTools/>
+  <DisplayElement component={"APP"} />
+ </header>
 <main>
+
   <DisplayContainer />
   <SideBarContainer />
-</main>
 
+</main>
 <style>
-  main {
+header {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1.5fr 1.5fr;
+  }
+ main {
     height: 100%;
     width: 100%;
     margin: 0;
     padding: 0;
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1.5fr 1.5fr;
   }
 </style>

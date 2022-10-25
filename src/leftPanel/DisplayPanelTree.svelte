@@ -1,23 +1,29 @@
 <script>
-  import tree from "../utils/d3TreeRender.js";
+  import MyTree from "../utils/d3TreeRender.js";
+  import {get } from 'svelte/store';
   import { onMount } from "svelte";
-  import { componentProps } from "../utils/store";
+  import {  treeData } from '../utils/store';
+  import '../AST.js'
+
+
+
   let el;
   let width;
   let height;
 
-  let colorScheme = window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
+
+  let colorScheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 
   onMount(() => {
-    tree.$onInit(el, width, height, colorScheme);
+    const t = get(treeData);
+    new MyTree(t.initData).$onInit(el, width, height, colorScheme);
   });
 
   window.matchMedia("(prefers-color-scheme: dark)").addListener(function (e) {
-    colorScheme = e.matches ? "dark" : "light";
+    colorScheme = e.matches ? "dark" : "light"; //#282c34
     tree.update(tree.root, colorScheme);
   });
+
 </script>
 
 <div

@@ -3,6 +3,15 @@
   import PerformanceProfiler from "./PerformanceProfiler.svelte";
   import Navbar from "./Navbar.svelte";
   import { onMount } from "svelte";
+  import { visibility } from '../utils/store';
+
+
+
+
+
+
+
+
   let component;
   let props;
   onMount(() => {
@@ -10,20 +19,19 @@
   });
   const panelTree = () => {
     component = DisplayPanelTree;
-    props = { treeProp: DisplayPanelTree };
   };
- 
+
 
   const panelProfiler = () => {
     component = PerformanceProfiler;
-    props = { chartProps: PerformanceProfiler };
   };
 </script>
 
 <div id="display-container">
   <Navbar {panelTree} {panelProfiler} />
+  {#if $visibility.component}
   <svelte:component this={component} {...props} />
-  <!-- <DisplayPanel  /> -->
+  {/if}
 </div>
 
 <style>

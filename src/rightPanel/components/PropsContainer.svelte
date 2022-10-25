@@ -4,14 +4,6 @@
   import PropsDisplayView from "./PropsDisplayView.svelte";
 
   export let type;
-  // export let data;
-  // $: data;
-  // let props;
-  // componentProps.update((val) => {
-  //   props = val;
-  // });
-
-
 
 </script>
 
@@ -23,7 +15,6 @@
 <style>
   #state-container,
   #props-container {
-    border: 1px solid rgb(105, 107, 112);
     display: grid;
     grid-template-rows: 35px minmax(0, 1fr);
     overflow: auto;

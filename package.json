@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "watch": "webpack --mode=development --watch --config config/webpack.config.js",
+    "dev": "webpack-dev-server --mode=development --config config/webpack.config.js",
     "build": "webpack --mode=production --config config/webpack.config.js",
     "format": "prettier --write --ignore-unknown \"{config,public,src}/**/*.{html,css,js,ts,json}\""
   },
@@ -30,6 +31,7 @@
   "dependencies": {
     "d3": "^7.6.1",
     "d3v4": "^4.2.2",
+    "portfinder-sync": "^0.0.2",
     "svelte": "^3.49.0",
     "svelte-icons-pack": "^2.0.0"
   }

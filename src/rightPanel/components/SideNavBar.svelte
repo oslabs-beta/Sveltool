@@ -10,12 +10,12 @@
 <style>
   #state-navbar,
   #props-navbar {
-    /* background-color: rgb(76, 80, 86); */
     display: flex;
     align-items: center;
+    border-top: 1px solid rgb(96, 99, 104);
     border-bottom: 1px solid rgb(96, 99, 104);
     height: 35px;
-    background-color: rgb(76, 80, 86);
+    background-color: #282c34
   }
 
   div {
