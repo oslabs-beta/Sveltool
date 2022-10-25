@@ -4,18 +4,21 @@
   import { onMount } from "svelte";
   import {  treeData } from '../utils/store';
   import '../AST.js'
+  import parser from '../parser.js';
 
+  $: treeData.update(async (tree) => {
+    tree.initData = await parser();
+    return tree;
+  })
 
+  $: t = get(treeData);
 
   let el;
   let width;
   let height;
-
-
   let colorScheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 
   onMount(() => {
-    const t = get(treeData);
     new MyTree(t.initData).$onInit(el, width, height, colorScheme);
   });
 
