@@ -5,13 +5,6 @@
   import { onMount } from "svelte";
   import { visibility } from '../utils/store';
 
-
-
-
-
-
-
-
   let component;
   let props;
   onMount(() => {
@@ -20,7 +13,6 @@
   const panelTree = () => {
     component = DisplayPanelTree;
   };
-
 
   const panelProfiler = () => {
     component = PerformanceProfiler;

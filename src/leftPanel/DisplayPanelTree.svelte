@@ -1,8 +1,8 @@
 <script>
   import MyTree from "../utils/d3TreeRender.js";
-  import {get } from 'svelte/store';
+  import { get } from 'svelte/store';
   import { onMount } from "svelte";
-  import {  treeData } from '../utils/store';
+  import { treeData } from '../utils/store';
   import '../AST.js'
   import parser from '../parser.js';
 
@@ -11,15 +11,20 @@
     return tree;
   })
 
-  $: t = get(treeData);
-
   let el;
   let width;
   let height;
   let colorScheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  // $: data;
 
+  // treeData.subscribe(value => {
+  //   console.log('Tree Data ==> ', value);
+  //   data = value;
+  // })
+  
   onMount(() => {
-    new MyTree(t.initData).$onInit(el, width, height, colorScheme);
+    {}
+    new MyTree(get(treeData.initData)).$onInit(el, width, height, colorScheme);
   });
 
   window.matchMedia("(prefers-color-scheme: dark)").addListener(function (e) {

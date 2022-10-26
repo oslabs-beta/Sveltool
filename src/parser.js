@@ -72,17 +72,14 @@ async function parser() {
           if (ASTnode.attributes[0]) {
             const foundProps = {};
             ASTnode.attributes.forEach(el => {
-              foundProps[el.name] = el.value[0].data;
+              foundProps[el.name] = el.value[0].data || '';
             })
             dependencyValue.props = foundProps;
           }
           dependencies[currentComponent]
             ? dependencies[currentComponent].push(dependencyValue)
             : (dependencies[currentComponent] = [dependencyValue]);
-            
-          
         }
-       
       },
     });
   });
