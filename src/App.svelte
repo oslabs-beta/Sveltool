@@ -4,26 +4,41 @@
   import SideBarContainer from "./rightPanel/SideBarContainer.svelte";
   import NavBarTools from './toolbar/NavBarTools.svelte';
   import DisplayElement from './toolbar/DisplayElement.svelte';
+  import { treeData } from './utils/store.js';
+  import parser from './parser.js';
 
+  function getData() {
+    new Promise(async (resolve, reject) => {
+      const data = await parser();
+      resolve(data);
+    })
+      .then(data => {
+        treeData.update((tree) => {
+          tree.initData = data;
+          return tree;
+        })
+      });
+  }
+  getData();
 </script>
-<header>
-  <NavBarTools/>
-  <DisplayElement component={"APP"} />
- </header>
-<main>
 
+<header>
+  <NavBarTools />
+  <DisplayElement component={'APP'} />
+</header>
+<main>
   <DisplayContainer />
   <SideBarContainer />
-
 </main>
+
 <style>
-header {
+  header {
     margin: 0;
     padding: 0;
     display: grid;
     grid-template-columns: 1.5fr 1.5fr;
   }
- main {
+  main {
     height: 100%;
     width: 100%;
     margin: 0;

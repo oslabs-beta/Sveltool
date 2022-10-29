@@ -1,4 +1,4 @@
-import { treeData } from './utils/store';
+// import { treeData } from './utils/store';
 import parser from './parser.js';
 
 
@@ -84,11 +84,11 @@ import parser from './parser.js';
 //   ],
 // };
 
-async function updateComponentData() {
+// async function updateComponentData() {
   
-}
+// }
 
-treeData.update((tree) => {
-  tree.initData = {name: '<App />'};
-  return tree;
-});
+// treeData.update((tree) => {
+//   tree.initData = {name: '<App />'};
+//   return tree;
+// });
