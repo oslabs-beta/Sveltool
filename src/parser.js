@@ -1,122 +1,129 @@
-// import { parse, walk } from 'svelte/compiler';
-// import fs from 'fs';
-// import path from 'path';
+import { parse, walk } from 'svelte/compiler';
+import D3DataObject from './createD3DataObject';
 
-// const source = `<script>
-// // COMPONENT IMPORTS
-// import Nav from "./components/Nav.svelte";
-// import { onMount } from "svelte";
-// // STORE IMPORTS
-// import {
-//   compInstancesStore,
-//   compCountsStore,
-//   compTimesStore,
-//   compArrayStore,
-// } from "./store.js";
+async function parser() {
+  const dependencies = {};
+  const state = {};
+  const checked = {};
+  const usedComponents = [];
+  
+  const arrSvelteFiles = await new Promise((resolve, reject) => {
+    chrome.devtools.inspectedWindow.getResources((resources) => {
+      const filteredResources = resources.filter(file => file.url.includes('.svelte'));
+      if (filteredResources) resolve(filteredResources);
+      else reject('No Svelte Resources Found');
+    })
+  });
 
-// onMount(() => {
-//   console.log("sending message from app mount");
-//   chrome.runtime.sendMessage({ header: "APP" });
-// });
+  console.log('Found Svelte Files ==> ', arrSvelteFiles);
 
-// chrome.runtime.onMessageExternal.addListener((msg, sender, response) => {
-//   if (
-//     msg.header === "INITIAL_LOAD" ||
-//     msg.header === "UPDATE_INSTANCE" ||
-//     msg.header === "UPDATE_RENDER" ||
-//     msg.header === "UPDATE_TIMES"
-//   ) {
-//     let { compCounts, compInstance, compTimes, compArray } = msg;
+  const componentNames = arrSvelteFiles.map(
+    svelteFile => `<${svelteFile.url.slice(
+      svelteFile.url.lastIndexOf('/') + 1,
+      svelteFile.url.lastIndexOf('.')
+    )} />`
+  )
 
-//     // parse all incoming data
-//     compCounts = JSON.parse(compCounts);
-//     compInstance = JSON.parse(compInstance);
-//     compTimes = JSON.parse(compTimes);
-//     compArray = JSON.parse(compArray);
+  console.log('Component Names ==> ', componentNames);
 
-//     // Get count data in correct format
-//     const adjustedCompCounts = [];
-//     for (const comp in compCounts) {
-//       const tempObj = {};
-//       tempObj.component = comp;
-//       tempObj.count = compCounts[comp];
-//       adjustedCompCounts.push(tempObj);
-//     }
+  // Define function to pull file content from file array
+  async function getContent(arrFiles) {
+    const content = await arrFiles.map(async (file, index) => {
+      const currentComponent = componentNames[index];
+  
+      // Only check each component once no matter how many copies of each .svelte file there are
+      if(checked[currentComponent]) return;
+      checked[currentComponent] = true;
+      usedComponents.push(currentComponent);
+  
+      // get file content for each Svelte file and process it
+      const output = await new Promise((resolve, reject) => {
+        file.getContent(source => {
+          if(source) resolve(source);
+        });
+      });
+      return output;
+    });
+    return Promise.all(content);
+  };
 
-//     // Get time data in correct format
-//     const adjustedCompTimes = [];
-//     for (let comp in compTimes) {
-//       let timeObj = {};
-//       timeObj.component = comp;
-//       timeObj.time = compTimes[comp];
-//       adjustedCompTimes.push(timeObj);
-//     }
+  // Process file array into content array
+  let arrSvelteContent = await getContent(arrSvelteFiles);  
+  // Filter components with no content or duplicate components
+  arrSvelteContent = arrSvelteContent.filter(content => {if(content) return content});
+  console.log('Svelte Content Array', arrSvelteContent);
 
-//     // Added compCounts to compCountsStore so it can be accessed in other components
-//     compCountsStore.set([...adjustedCompCounts]);
+  // Iterate over each file content object and process it
+  arrSvelteContent.forEach((content, index) => {
+    const currentComponent = usedComponents[index];
 
-//     // Added compInstance to compInstanceStore so it can be accessed in other components
-//     compInstancesStore.set({ ...compInstance });
+    // Parse the file contents and build an AST
+    const ast = parse(content);
+    console.log('AST ==> ', ast);
 
-//     // Added compCounts to compCountsStore so it can be accessed in other components
-//     compTimesStore.set([...adjustedCompTimes]);
+    // Walk the AST and output dependencies, props, and state
+    walk(ast, {
+      enter(ASTnode, parent, prop, index) {
+        // find component dependencies
+        if (ASTnode.type === 'InlineComponent') {
+          const dependencyValue = {};
+          dependencyValue.name = `<${ASTnode.name} />`;
+          // find props
+          if (ASTnode.attributes[0]) {
+            const foundProps = {};
+            ASTnode.attributes.forEach(el => {
+              foundProps[el.name] = el.value[0].data || '';
+            })
+            dependencyValue.props = foundProps;
+          }
+          dependencies[currentComponent]
+            ? dependencies[currentComponent].push(dependencyValue)
+            : (dependencies[currentComponent] = [dependencyValue]);
+        }
+      },
+    });
+  });
 
-//     // Added compCounts to compCountsStore so it can be accessed in other components
-//     compArrayStore.set([...compArray]);
+  console.log('Parent > Dependencies List ==> ', dependencies);
 
-//   }
-// });
-// </script>
+  const newArray = [];
+  // console.log('newArray empty ==> ', newArray);
 
-// <main>
-// <h1>Svelcro</h1>
-// <Nav />
-// </main>
+  const allComponents = [];
+  console.log('AllComponents Empty ==> ', allComponents);
 
-// <style>
-// main {
-//   text-align: center;
-//   max-width: auto;
-//   margin: 0 auto;
-//   height: 100%;
-//   background-color: rgb(37, 35, 37);
-// }
+  for (const key in dependencies) {
+    // console.log('continuity check ==> ', dependencies);
+    // console.log('key ==> ', key);
+    // console.log('value => ', dependencies[key]);
+    // console.log('before ==> ', newArray);
+    allComponents.push([key, dependencies[key]]);
+    // console.log('after ==> ', newArray);
+  }
 
-// h1 {
-//   color: #ff3e00;
-//   text-transform: uppercase;
-//   font-size: 4em;
-//   font-weight: 100;
-//   margin: 0;
-// }
-
-// @media (min-width: 640px) {
-//   main {
-//     max-width: none;
-//   }
-// }
-// </style>
-// `;
-
-// console.log('Source Code ==> ', source);
-
-// const ast = parse(source);
-
-// console.log('AST ==> ', JSON.stringify(ast, null, 2));
-
-// fs.writeFile('AST.json', JSON.stringify(ast), (error) => console.error(JSON.stringify(error)));
-
-////// *************>-----------< START >-----------<************** ///////
-
-function getInspectedResources() {
-  // get all files from current tab
-  chrome.devtools.inspectedWindow.getResources((stuff) => {
-    // filter Svelte files from "rescources"
-    const svelteFilesArr = stuff.filter((file) =>
-      file.url.includes('.svelte')
-    );
-    console.log('Resources from inspected window ==> \n\n', svelteFilesArr);
-  })
+  // find the root component
+  let rootComponent;
+  // const allComponents = Object.entries(dependencies);
+  console.log('All Components ==> ', allComponents);
+  while (!rootComponent) {
+    const curr = allComponents.shift();
+    const currName = curr[0];
+    // console.log('Current element ==> ', curr);
+    let foundRoot = true;
+    allComponents.forEach(comp => {
+      comp[1].forEach(dep => {
+        const {name} = dep;
+        if (name === currName) foundRoot = false;
+      })
+    });
+    if (foundRoot) rootComponent = currName;
+    allComponents.push(curr);
+  }
+  console.log('Root component ==> ', rootComponent);
+  // console.log('Parent > Dependencies List continuity check ==> ', dependencies);
+  const output = new D3DataObject(rootComponent, dependencies, state);
+  console.log('Parser Output ==> ', output.data);
+  return output.data;
 }
 
-export default getInspectedResources();
+export default parser;
