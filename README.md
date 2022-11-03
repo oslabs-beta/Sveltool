@@ -14,7 +14,8 @@
 
 ## Sveltool Features
 
-<li>Sveltool parses your webpage and extracts the components, as well as their associated state and props.</li>
+- Sveltool parses your webpage and extracts the components, as well as their associated state and props.
+
 <li>The tool then displays your component structure in an easy-to-understand, tree-like visualization powered by the D3.js libray. </li>
 <li>This allows you to view the hierarchical structure of your webpage and easily find the state and props of any component.</li>
 
@@ -23,6 +24,7 @@
 ## How to get started
 
 Sveltool is in the process of being added to the Chrome Web Store. At that point, downloading Sveltool will automatically integrate it into your Chrome DevTools.
+
 <li>In the meantime, you can fork and clone this repository. From there open Sveltool in your IDE
 in the terminal run</li>
 
@@ -38,8 +40,6 @@ npm run build
 ```
 
 After you run build, navigate to the Google Chrome Extensions page in your browser, turn developer mode on, and click “Load Unpacked” (in the top left). Go to the Sveltool file and upload the “build” folder into Chrome Extensions. When your Svelte app is open right click and go to “inspect”, where you will see the option to open Sveltool!
-
-
 
 ## Troubleshooting
 
