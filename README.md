@@ -1,6 +1,6 @@
 <div align="center">
 
-![banner](./public/icons/tools (1).png)
+![banner](./public/icons/tools1.png)
 
 ![MIT License](https://img.shields.io/badge/license-MIT-%23fb7182)
 ![GitHub Stars](https://img.shields.io/github/stars/oslabs-beta/Sveltool?color=%23fb7182)
