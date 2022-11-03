@@ -7,7 +7,7 @@
 [⚡ Getting Started](http://sveltool.com/) |
 [📚 Documentation](http://sveltool.com/) |
 [⌨️ Blog](mediumArticle) |
-[💬 Twitter](https://twitter.com/svelvet_oslabs) |
+[💬 Twitter](https://twitter.com/sveltool) |
 [💼 LinkedIn](https://www.linkedin.com/company/sveltool/)
 
 </div>
@@ -81,12 +81,11 @@ Contact us
 info@sveltool.com
 
 ## Contributors
+- Daniel Aurand • [LinkedIn](https://www.linkedin.com/in/daniel-aurand/) • [Github](https://github.com/daurand)
+- Jessica Davila• [LinkedIn](https://www.linkedin.com/in/jessica-davila-5a8380115/) • [Github](https://github.com/jessdvila)
+- Micheal Grant • [LinkedIn](https://www.linkedin.com/in/michaelcolliergrant/) • [Github](https://github.com/MichaelCGrant)
+- Adepeju Orefejo• [LinkedIn](https://www.linkedin.com/in/adepeju-orefejo/) • [Github](https://github.com/adepeju4)
+- Meow Puttamadilok• [LinkedIn](https://www.linkedin.com/in/thasanee-p-686125243/) • [Github](https://github.com/Meowmerry)
 
-Daniel Aurand | linked in & github
-Jessica Davila | linked in & github
-Michael Grant | linked in & github
-Adepeju Orefejo | linked in & github
-Meow Puttamadilok | linked in & github
-
-License
+## License
 MIT
