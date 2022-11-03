@@ -22,7 +22,7 @@ export const profileFrame = writable({});
 
 export const treeData = writable({
   edited: false,
-  initData: {name: '<App />'},
+  initData: { name: '<App />' },
   editData: {},
 });
 

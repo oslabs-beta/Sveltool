@@ -6,23 +6,26 @@ async function parser() {
   const state = {};
   const checked = {};
   const usedComponents = [];
-  
+
   const arrSvelteFiles = await new Promise((resolve, reject) => {
     chrome.devtools.inspectedWindow.getResources((resources) => {
-      const filteredResources = resources.filter(file => file.url.includes('.svelte'));
+      const filteredResources = resources.filter((file) =>
+        file.url.includes('.svelte')
+      );
       if (filteredResources) resolve(filteredResources);
       else reject('No Svelte Resources Found');
-    })
+    });
   });
 
   console.log('Found Svelte Files ==> ', arrSvelteFiles);
 
   const componentNames = arrSvelteFiles.map(
-    svelteFile => `<${svelteFile.url.slice(
-      svelteFile.url.lastIndexOf('/') + 1,
-      svelteFile.url.lastIndexOf('.')
-    )} />`
-  )
+    (svelteFile) =>
+      `<${svelteFile.url.slice(
+        svelteFile.url.lastIndexOf('/') + 1,
+        svelteFile.url.lastIndexOf('.')
+      )} />`
+  );
 
   console.log('Component Names ==> ', componentNames);
 
@@ -30,27 +33,29 @@ async function parser() {
   async function getContent(arrFiles) {
     const content = await arrFiles.map(async (file, index) => {
       const currentComponent = componentNames[index];
-  
+
       // Only check each component once no matter how many copies of each .svelte file there are
-      if(checked[currentComponent]) return;
+      if (checked[currentComponent]) return;
       checked[currentComponent] = true;
       usedComponents.push(currentComponent);
-  
+
       // get file content for each Svelte file and process it
       const output = await new Promise((resolve, reject) => {
-        file.getContent(source => {
-          if(source) resolve(source);
+        file.getContent((source) => {
+          if (source) resolve(source);
         });
       });
       return output;
     });
     return Promise.all(content);
-  };
+  }
 
   // Process file array into content array
-  let arrSvelteContent = await getContent(arrSvelteFiles);  
+  let arrSvelteContent = await getContent(arrSvelteFiles);
   // Filter components with no content or duplicate components
-  arrSvelteContent = arrSvelteContent.filter(content => {if(content) return content});
+  arrSvelteContent = arrSvelteContent.filter((content) => {
+    if (content) return content;
+  });
   console.log('Svelte Content Array', arrSvelteContent);
 
   // Iterate over each file content object and process it
@@ -71,9 +76,9 @@ async function parser() {
           // find props
           if (ASTnode.attributes[0]) {
             const foundProps = {};
-            ASTnode.attributes.forEach(el => {
+            ASTnode.attributes.forEach((el) => {
               foundProps[el.name] = el.value[0].data || '';
-            })
+            });
             dependencyValue.props = foundProps;
           }
           dependencies[currentComponent]
@@ -110,11 +115,11 @@ async function parser() {
     const currName = curr[0];
     // console.log('Current element ==> ', curr);
     let foundRoot = true;
-    allComponents.forEach(comp => {
-      comp[1].forEach(dep => {
-        const {name} = dep;
+    allComponents.forEach((comp) => {
+      comp[1].forEach((dep) => {
+        const { name } = dep;
         if (name === currName) foundRoot = false;
-      })
+      });
     });
     if (foundRoot) rootComponent = currName;
     allComponents.push(curr);

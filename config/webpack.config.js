@@ -11,7 +11,6 @@ const config = (env, argv) =>
     entry: {
       panel: PATHS.src + '/panel.js',
     },
-   
   });
 
 module.exports = config;
