@@ -5,7 +5,7 @@
   import NavBarTools from './toolbar/NavBarTools.svelte';
   import DisplayElement from './toolbar/DisplayElement.svelte';
   import { treeData } from './utils/store.js';
-  import parser from './parser.js';
+  import parser from './utils/parser.js';
 
   function getData() {
     new Promise(async (resolve, reject) => {
@@ -24,7 +24,7 @@
 
 <header>
   <NavBarTools />
-  <DisplayElement component={'APP'} />
+  <DisplayElement />
 </header>
 <main>
   <DisplayContainer />

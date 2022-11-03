@@ -19,8 +19,4 @@
     grid-template-rows: 35px minmax(0, 1fr);
     overflow: auto;
   }
-
-  #props-container {
-    grid-template-rows: 30px minmax(0, 1fr);
-  }
 </style>

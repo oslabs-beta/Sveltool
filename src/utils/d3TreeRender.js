@@ -6,9 +6,7 @@ import { componentProps, componentState, currentComponent } from './store';
   'use strict';
 })();
 
-let tree = d3.tree;
-let hierarchy = d3.hierarchy;
-let select = d3.select;
+let { tree, hierarchy, select } = d3;
 
 class MyTree {
   constructor(data) {
