@@ -24,7 +24,7 @@ The tool then displays your component structure in an easy-to-understand, tree-l
 
 This allows you to view the hierarchical structure of your webpage and easily find the state and props of any component.
 
-[[INSERT ANIMATION]]
+![banner](./public/icons/sveltool-demo.gif)
 
 ## How to get started
 
