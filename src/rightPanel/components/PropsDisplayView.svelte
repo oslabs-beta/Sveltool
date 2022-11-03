@@ -28,7 +28,6 @@
     padding-top: 1rem;
     padding-left: 1rem;
     overflow: auto;
-    color: #fff;
   }
 
   #state-root {

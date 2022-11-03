@@ -110,9 +110,7 @@ const changeState = (state, nested = false) => {
 
   const uniContainer = createContainerEl();
   const header = document.createElement('div');
-  header.innerHTML = `{`;
   const footer = document.createElement('div');
-  footer.innerHTML = `}`;
   header.style.fontSize = '1.5rem';
   footer.style.fontSize = '1.5rem';
   if (!nested) {
