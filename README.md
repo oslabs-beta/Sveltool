@@ -3,8 +3,8 @@
 ![banner](./public/icons/3.png)
 
 ![MIT License](https://img.shields.io/badge/license-MIT-%23fb7182)
-![GitHub Stars](https://img.shields.io/github/stars/open-source-labs/Sveltool?color=%23fb7182)
-![GitHub Forks](https://img.shields.io/github/forks/open-source-labs/Sveltool?color=%23fb7182)
+![GitHub Stars](https://img.shields.io/github/stars/oslabs-beta/Sveltool?color=%23fb7182)
+![GitHub Forks](https://img.shields.io/github/forks/oslabs-beta/Sveltool?color=%23fb7182)
 
 # Introducing Sveltool, a dynamic visualization tool for all things Svelte.
 
