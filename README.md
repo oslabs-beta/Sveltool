@@ -4,18 +4,26 @@
 
 # Introducing Sveltool, a dynamic visualization tool for all things Svelte.
 
+[⚡ Getting Started](http://sveltool.com/) |
+[📚 Documentation](http://sveltool.com/) |
+[⌨️ Blog](mediumArticle) |
+[💬 Twitter](https://twitter.com/svelvet_oslabs) |
+[💼 LinkedIn](https://www.linkedin.com/company/sveltool/)
+
 </div>
 
 ## Sveltool Features
 
-In-browser Developer Tool Sveltool parses your webpage and extracts the components as well as their associated state and props.
-Dynamic Visualization of Component Hierarchy Displays your component structure in an easy-to-understand tree-like visualization using the D3.js library. This allows you to view the hierarchical structure of your webpage and easily find the state and props of any component.
+<li>Sveltool parses your webpage and extracts the components, as well as their associated state and props.</li>
+<li>The tool then displays your component structure in an easy-to-understand, tree-like visualization powered by the D3.js libray. </li>
+<li>This allows you to view the hierarchical structure of your webpage and easily find the state and props of any component.</li>
 
+<li>[[INSERT ANIMATION]]</li>
 ## How to get started
 
 Sveltool is in the process of being added to the Chrome Web Store. At that point, downloading Sveltool will automatically integrate it into your Chrome DevTools.
-In the meantime, you can fork and clone this repository. From there open Sveltool in your IDE
-in the terminal run
+<li>In the meantime, you can fork and clone this repository. From there open Sveltool in your IDE
+in the terminal run</li>
 
 ```bash
 cd [Sveltool/name of directory]
@@ -30,7 +38,7 @@ npm run build
 
 After you run build, navigate to the Google Chrome Extensions page in your browser, turn developer mode on, and click “Load Unpacked” (in the top left). Go to the Sveltool file and upload the “build” folder into Chrome Extensions. When your Svelte app is open right click and go to “inspect”, where you will see the option to open Sveltool!
 
-[[INSERT ANIMATION]]
+
 
 ## Troubleshooting
 
