@@ -19,6 +19,7 @@
 <li>This allows you to view the hierarchical structure of your webpage and easily find the state and props of any component.</li>
 
 <li>[[INSERT ANIMATION]]</li>
+
 ## How to get started
 
 Sveltool is in the process of being added to the Chrome Web Store. At that point, downloading Sveltool will automatically integrate it into your Chrome DevTools.
