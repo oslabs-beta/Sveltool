@@ -10,7 +10,7 @@
 
 [⚡ Getting Started](http://sveltool.com/) |
 [📚 Documentation](http://sveltool.com/) |
-[⌨️ Blog](mediumArticle) |
+[⌨️ Blog](https://medium.com/@daurand303/introducing-sveltool-20d2cc1977a8) |
 [💬 Twitter](https://twitter.com/sveltool) |
 [💼 LinkedIn](https://www.linkedin.com/company/sveltool/)
 
@@ -80,7 +80,7 @@ Check out our website
 [here](http://sveltool.com/)
 
 Read our latest blog
-[[insert medium article]]
+[here](https://medium.com/@daurand303/introducing-sveltool-20d2cc1977a8)
 
 Follow us on Twitter
 [@Sveltool](https://twitter.com/sveltool)
