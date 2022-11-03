@@ -1,7 +1,7 @@
 <div align="center">
 Introducing Sveltool, a dynamic visualization tool for all things Svelte.
 
-<div/>
+</div>
 
 ## Sveltool Features
 
