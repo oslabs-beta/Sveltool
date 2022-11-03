@@ -1,6 +1,6 @@
 <div align="center">
 
-![banner](./public/icons/tools1.png)
+![banner](./public/icons/tools.png)
 
 ![MIT License](https://img.shields.io/badge/license-MIT-%23fb7182)
 ![GitHub Stars](https://img.shields.io/github/stars/oslabs-beta/Sveltool?color=%23fb7182)
@@ -83,7 +83,7 @@ Read our latest blog
 [[insert medium article]]
 
 Follow us on Twitter
-[@Sveltool](https://twitter.com/sveltool) 
+[@Sveltool](https://twitter.com/sveltool)
 
 Contact us
 info@sveltool.com
