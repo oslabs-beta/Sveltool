@@ -43,8 +43,8 @@ class MyTree {
       d.name = d.id; //transferring name to a name letiable
       d.id = this.i; //Assigning numerical Ids
       this.i++;
-    })
-    this.root.x0 = this.root.x
+    });
+    this.root.x0 = this.root.x;
     this.root.y0 = this.root.y;
 
     this.svg = select(d3El)

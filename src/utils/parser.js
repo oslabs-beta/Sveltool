@@ -110,7 +110,7 @@ async function parser() {
     if (foundRoot) rootComponent = currName;
     allComponents.push(curr);
   }
-  
+
   // Build output json to send to D3 renderer
   // state is not currently being found or passed to D3
   const output = new D3DataObject(rootComponent, dependencies, state);

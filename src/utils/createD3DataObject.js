@@ -1,8 +1,8 @@
 /**
- * 
+ *
  * Takes in the root component and the dependency definitions object.
  * Builds the output json to send to the D3 renderer.
- *  
+ *
  **/
 
 function D3DataObject(root = '<App />', dependencies = {}, state = {}) {
