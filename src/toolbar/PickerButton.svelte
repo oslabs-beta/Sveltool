@@ -1,20 +1,12 @@
 <script>
-
   import Button from './Button.svelte'
-
   let active = false
-
-
   function click() {
     if (active) {
       active = false
-    
       return
     }
-
-  
     active = true
-   
   }
 </script>
 

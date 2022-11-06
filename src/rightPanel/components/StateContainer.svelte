@@ -1,11 +1,7 @@
 <script>
   import SideNavBar from "./SideNavBar.svelte";
   import StateDisplayView from "./StateDisplayView.svelte";
-
   export let type;
-
-
-
 </script>
 
 <div id={`${type.toLowerCase()}-container`}>

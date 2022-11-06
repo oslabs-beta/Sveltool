@@ -2,11 +2,13 @@ import { parse, walk } from 'svelte/compiler';
 import D3DataObject from './createD3DataObject';
 
 async function parser() {
+  // Define temporary data structures
   const dependencies = {};
   const state = {};
   const checked = {};
   const usedComponents = [];
 
+  // Get all files from inspected window that end in ".svelte"
   const arrSvelteFiles = await new Promise((resolve, reject) => {
     chrome.devtools.inspectedWindow.getResources((resources) => {
       const filteredResources = resources.filter((file) =>
@@ -17,8 +19,7 @@ async function parser() {
     });
   });
 
-  console.log('Found Svelte Files ==> ', arrSvelteFiles);
-
+  // Create an array of component names from ".svelte" files
   const componentNames = arrSvelteFiles.map(
     (svelteFile) =>
       `<${svelteFile.url.slice(
@@ -27,9 +28,7 @@ async function parser() {
       )} />`
   );
 
-  console.log('Component Names ==> ', componentNames);
-
-  // Define function to pull file content from file array
+  // Define function to pull file content from filtered file array
   async function getContent(arrFiles) {
     const content = await arrFiles.map(async (file, index) => {
       const currentComponent = componentNames[index];
@@ -56,7 +55,6 @@ async function parser() {
   arrSvelteContent = arrSvelteContent.filter((content) => {
     if (content) return content;
   });
-  console.log('Svelte Content Array', arrSvelteContent);
 
   // Iterate over each file content object and process it
   arrSvelteContent.forEach((content, index) => {
@@ -64,7 +62,6 @@ async function parser() {
 
     // Parse the file contents and build an AST
     const ast = parse(content);
-    console.log('AST ==> ', ast);
 
     // Walk the AST and output dependencies, props, and state
     walk(ast, {
@@ -89,21 +86,10 @@ async function parser() {
     });
   });
 
-  console.log('Parent > Dependencies List ==> ', dependencies);
-
-  const newArray = [];
-  // console.log('newArray empty ==> ', newArray);
-
+  // Build array of all components from dependency array with thier depedencies
   const allComponents = [];
-  console.log('AllComponents Empty ==> ', allComponents);
-
   for (const key in dependencies) {
-    // console.log('continuity check ==> ', dependencies);
-    // console.log('key ==> ', key);
-    // console.log('value => ', dependencies[key]);
-    // console.log('before ==> ', newArray);
     allComponents.push([key, dependencies[key]]);
-    // console.log('after ==> ', newArray);
   }
 
   // find the root component
@@ -124,10 +110,10 @@ async function parser() {
     if (foundRoot) rootComponent = currName;
     allComponents.push(curr);
   }
-  console.log('Root component ==> ', rootComponent);
-  // console.log('Parent > Dependencies List continuity check ==> ', dependencies);
+
+  // Build output json to send to D3 renderer
+  // state is not currently being found or passed to D3
   const output = new D3DataObject(rootComponent, dependencies, state);
-  console.log('Parser Output ==> ', output.data);
   return output.data;
 }
 

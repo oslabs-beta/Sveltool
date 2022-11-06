@@ -13,9 +13,3 @@ import Toolbar from "./Toolbar.svelte";
    <VisibilityButton />
     <Search />   
 </Toolbar>
-   
-
-<style>
-
- 
-</style>

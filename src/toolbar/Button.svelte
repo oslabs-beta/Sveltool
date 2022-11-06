@@ -56,10 +56,6 @@
     color: rgba(249, 249, 250, 0.8);
   }
 
-  /* :global(.dark) button:disabled {
-    color: rgba(249, 249, 250, 0.2);
-  } */
-
   :global(.dark) button:disabled,
   button:disabled {
     background-color: transparent;

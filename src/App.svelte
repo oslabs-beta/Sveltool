@@ -7,6 +7,7 @@
   import { treeData } from './utils/store.js';
   import parser from './utils/parser.js';
 
+  // Gets inspected window resources and parses into json to pass to D3 renderer
   function getData() {
     new Promise(async (resolve, reject) => {
       const data = await parser();

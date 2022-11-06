@@ -1,3 +1,10 @@
+/**
+ *
+ * Takes in the root component and the dependency definitions object.
+ * Builds the output json to send to the D3 renderer.
+ *
+ **/
+
 function D3DataObject(root = '<App />', dependencies = {}, state = {}) {
   this.getData = (component = root, props) => {
     const componentData = {};
@@ -10,7 +17,6 @@ function D3DataObject(root = '<App />', dependencies = {}, state = {}) {
       );
     return componentData;
   };
-
   this.data = this.getData();
 }
 

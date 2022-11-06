@@ -16,7 +16,6 @@
       el.appendChild(element)
     });
     }
-
   });
 
 </script>
