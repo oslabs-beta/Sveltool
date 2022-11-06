@@ -1,10 +1,7 @@
 <script>
   import SideNavBar from "./SideNavBar.svelte";
-
   import PropsDisplayView from "./PropsDisplayView.svelte";
-
   export let type;
-
 </script>
 
 <div id={`${type.toLowerCase()}-container`}>

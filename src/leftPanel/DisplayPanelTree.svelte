@@ -26,5 +26,3 @@
   bind:clientHeight={height}
 />
 
-<style>
-</style>

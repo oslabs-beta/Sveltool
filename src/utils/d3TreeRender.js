@@ -40,15 +40,11 @@ class MyTree {
     this.root = this.tree(hierarchy(this.data));
 
     this.root.each((d) => {
-      // @ts-ignore
       d.name = d.id; //transferring name to a name letiable
-      // @ts-ignore
       d.id = this.i; //Assigning numerical Ids
       this.i++;
-    });
-    // @ts-ignore
-    this.root.x0 = this.root.x;
-    // @ts-ignore
+    })
+    this.root.x0 = this.root.x
     this.root.y0 = this.root.y;
 
     this.svg = select(d3El)
@@ -68,27 +64,6 @@ class MyTree {
   }
 
   connector = function (d) {
-    // //curved
-    // return (
-    //   "M" +
-    //   d.y +
-    //   "," +
-    //   d.x +
-    //   "C" +
-    //   (d.y + d.parent.y) / 2 +
-    //   "," +
-    //   d.x +
-    //   " " +
-    //   (d.y + d.parent.y) / 2 +
-    //   "," +
-    //   d.parent.x +
-    //   " " +
-    //   d.parent.y +
-    //   "," +
-    //   d.parent.x
-    // );
-    //straight
-
     return 'M' + d.parent.y + ',' + d.parent.x + 'V' + d.x + 'H' + d.y;
   };
 
@@ -99,27 +74,6 @@ class MyTree {
       d.children = null;
     }
   };
-
-  //DONT NEED THIS FUNCTION -- BUT THIS IS HOW IT WORKS UNDERHOOD//
-  // //passing in component clicked on and root component
-  // componentSearch = (d, sourceData) => {
-  //   let resultData;
-
-  //   if (sourceData.name === d) {
-  //     resultData = { props: sourceData.props, state: sourceData.state };
-  //     return resultData;
-  //   }
-
-  //   //if it's not root component that was clicked --> if root component has children, then iterate through children
-  //   if (sourceData.children) {
-  //     for (let i = 0; i < sourceData.children.length; i++) {
-  //       //recursively call component search to see if sourceData.children[i] has children
-  //       let recursive = this.componentSearch(d, sourceData.children[i]);
-  //       if (recursive) return recursive;
-  //     }
-  //   }
-  //   return null;
-  // };
 
   click = (d) => {
     d = d.target.__data__;
@@ -173,10 +127,8 @@ class MyTree {
       .duration(this.duration)
       .attr('height', this.height);
 
-    // Update the nodes…
-    // @ts-ignore
+    // Update the nodes
     let node = this.svg.selectAll('g.node').data(nodesSort, function (d) {
-      // @ts-ignore
       return d.id || (d.id = ++this.i);
     });
 
@@ -202,20 +154,15 @@ class MyTree {
       })
       .attr('fill', '#ff3e00');
 
-    // @ts-ignore
-
     nodeEnter
       .append('text')
-      // @ts-ignore
       .attr('x', function (d) {
         return d.children || d._children ? 10 : 10;
       })
       .attr('dy', '.35em')
-      // @ts-ignore
       .attr('text-anchor', function (d) {
         return d.children || d._children ? 'start' : 'start';
       })
-      // @ts-ignore
       .text(function (d) {
         if (d.data.name && d.data.name.length > 20) {
           return d.data.name.substring(0, 20) + '...';
@@ -225,16 +172,12 @@ class MyTree {
       })
       .style('fill-opacity', 1e-6)
       .style('cursor', 'pointer');
-
-    // @ts-ignore
     nodeEnter.append('svg:title').text(function (d) {
       return d.data.name;
     });
 
     // Transition nodes to their new position.
     let nodeUpdate = node.merge(nodeEnter).transition().duration(this.duration);
-
-    // @ts-ignore
     nodeUpdate.attr('transform', function (d) {
       return 'translate(' + d.y + ',' + d.x + ')';
     });
@@ -246,7 +189,6 @@ class MyTree {
       })
       .attr('fill', '#ff3e00')
       .attr('height', '50px')
-      // @ts-ignore
       .style('cursor', function (d) {
         return 'pointer';
       });
@@ -257,7 +199,6 @@ class MyTree {
     let nodeExit = node.exit().transition().duration(this.duration);
 
     nodeExit
-      // @ts-ignore
       .attr('transform', function (d) {
         return 'translate(' + source.y + ',' + source.x + ')';
       })
@@ -270,7 +211,6 @@ class MyTree {
     nodeExit.select('text').style('fill-opacity', 1e-6);
 
     // Update the links…
-    // @ts-ignore
     let link = this.svg.selectAll('path.link').data(links, function (d) {
       // return d.target.id;
       let id = d.id + '->' + d.parent.id;
@@ -282,7 +222,6 @@ class MyTree {
       .enter()
       .insert('path', 'g')
       .attr('class', 'link')
-      // @ts-ignore
       .attr('d', (d) => {
         let o = {
           x: source.x0,
@@ -304,7 +243,6 @@ class MyTree {
       .exit()
       .transition()
       .duration(this.duration)
-      // @ts-ignore
       .attr('d', (d) => {
         let o = {
           x: source.x,

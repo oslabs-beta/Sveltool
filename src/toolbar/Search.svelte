@@ -57,14 +57,6 @@
   <Button on:click={prev} disabled={!results.length}>
     <div class="prev" />
   </Button>
-  <!-- <input placeholder="Search"  class="search" />
-
-  <Button type="submit" >
-    <div class="next" />
-  </Button>
-  <Button >
-    <div class="prev" />
-  </Button> -->
 </form>
 
 <style>

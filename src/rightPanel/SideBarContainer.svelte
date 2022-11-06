@@ -1,9 +1,6 @@
 <script>
-
   import PropsContainer from "./components/PropsContainer.svelte";
   import StateContainer from "./components/StateContainer.svelte";
-
- 
 </script>
 
 <div id="sidebar-container">
