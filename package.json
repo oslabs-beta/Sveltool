@@ -32,7 +32,7 @@
     "d3": "^7.6.1",
     "d3v4": "^4.2.2",
     "portfinder-sync": "^0.0.2",
-    "svelte": "^3.49.0",
+    "svelte": "^3.54.0",
     "svelte-icons-pack": "^2.0.0"
   }
 }
