@@ -13,7 +13,7 @@
     "@babel/core": "^7.18.13",
     "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.19.4",
-    "babel-loader": "^8.2.5",
+    "babel-loader": "^9.1.2",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.1",
